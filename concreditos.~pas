@@ -1,0 +1,101 @@
+unit concreditos;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ComCtrls, DB, StdCtrls, Buttons, Mask, DBCtrls,
+  ExtCtrls;
+
+type
+  Tconsultacred = class(TForm)
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    DBGrid1: TDBGrid;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    DataSource1: TDataSource;
+    Edit1: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    DataSource2: TDataSource;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    Label5: TLabel;
+    DBEdit3: TDBEdit;
+    Label6: TLabel;
+    DBEdit4: TDBEdit;
+    DBNavigator1: TDBNavigator;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  consultacred: Tconsultacred;
+
+implementation
+
+uses Unit2, repcred;
+
+{$R *.dfm}
+
+procedure Tconsultacred.BitBtn1Click(Sender: TObject);
+begin
+data.concred.Active:=true;
+data.totprest.Active:=true;
+data.concred.Close;
+   data.concred.SQL.Clear;
+   data.concred.SQL.Add('select * from credito');
+   data.concred.SQL.Add('where importe >'+edit1.Text);
+   data.concred.SQL.Add('and fecha >=:fecha1 and fecha <=:fecha2');
+  data.concred.Parameters.ParamByName('fecha1').value := datetostr(DateTimePicker1.Date);
+   data.concred.Parameters.ParamByName('fecha2').value := datetostr(DateTimePicker2.date);
+  data.concred.Open;
+  if data.concred.Eof then
+  begin
+  Messagedlg(' No hay para este rango de fechas',MTerror,[mbok],0);
+   data.totprest.Active:=false;
+   end
+   else
+   begin
+    data.totprest.Close;
+   data.totprest.SQL.Clear;
+   data.totprest.SQL.Add('select count(cred_num) as cant,sum(importe) as totpres,sum(interes) as inter,sum(monto_mens) as totgenera from credito');
+  data.totprest.SQL.Add('where importe >'+edit1.Text);
+   data.totprest.SQL.Add('and fecha >=:fecha1 and fecha <=:fecha2');
+  data.totprest.Parameters.ParamByName('fecha1').value := datetostr(DateTimePicker1.Date);
+  data.totprest.Parameters.ParamByName('fecha2').value := datetostr(DateTimePicker2.date);
+   data.totprest.Open;
+
+end;
+end;
+
+procedure Tconsultacred.BitBtn2Click(Sender: TObject);
+begin
+repcreditos.qrlabel4.caption:=datetostr(datetimepicker1.date);
+repcreditos.qrlabel5.caption:=datetostr(datetimepicker1.date);
+repcreditos.repcred.preview;
+end;
+
+procedure Tconsultacred.FormCreate(Sender: TObject);
+begin
+datetimepicker1.DateTime:=(now);
+datetimepicker2.DateTime:=(now);
+end;
+
+procedure Tconsultacred.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+data.concred.Active:=false;
+data.totprest.Active:=false;
+end;
+
+end.

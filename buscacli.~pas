@@ -1,0 +1,64 @@
+unit buscacli;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls;
+
+type
+  TBuscacliente = class(TForm)
+    DBGrid1: TDBGrid;
+    DBNavigator1: TDBNavigator;
+    ComboBox1: TComboBox;
+    Edit1: TEdit;
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Buscacliente: TBuscacliente;
+
+implementation
+
+uses creditos, Unit2;
+
+{$R *.dfm}
+
+procedure TBuscacliente.DBGrid1DblClick(Sender: TObject);
+begin
+credito.Edit2.Text:=data.buscacli.fieldbyname('cod_cliente').Value;
+credito.Edit3.Text:=data.buscacli.fieldbyname('Nombre').Value;
+credito.Edit4.Text:=data.buscacli.fieldbyname('direccion').Value;
+
+close;
+end;
+
+procedure TBuscacliente.FormCreate(Sender: TObject);
+begin
+data.ADOQuery3.Active:=true;
+combobox1.ItemIndex:= 0;
+end;
+
+procedure TBuscacliente.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key = #13 THEN
+BEGIN
+IF Not data.buscacli.Locate(ComboBox1.Text,Edit1.Text,[])Then
+Messagedlg('Registro No Encontrado',MTerror,[mbok],0);
+END;
+end;
+
+procedure TBuscacliente.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+data.ADOQuery3.Active:=false;
+end;
+
+end.

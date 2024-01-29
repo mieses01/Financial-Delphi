@@ -1,0 +1,639 @@
+object estado: Testado
+  Left = 168
+  Top = 117
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Estado de cuenta'
+  ClientHeight = 556
+  ClientWidth = 756
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 16
+    Top = 8
+    Width = 40
+    Height = 13
+    Caption = 'Nombre:'
+    FocusControl = DBEdit1
+  end
+  object Label2: TLabel
+    Left = 16
+    Top = 48
+    Width = 73
+    Height = 13
+    Caption = 'Marca vehiculo'
+    FocusControl = DBEdit2
+  end
+  object Label3: TLabel
+    Left = 16
+    Top = 88
+    Width = 38
+    Height = 13
+    Caption = 'Modelo:'
+    FocusControl = DBEdit3
+  end
+  object Label4: TLabel
+    Left = 160
+    Top = 88
+    Width = 19
+    Height = 13
+    Caption = 'A'#241'o'
+    FocusControl = DBEdit4
+  end
+  object Label5: TLabel
+    Left = 336
+    Top = 8
+    Width = 26
+    Height = 13
+    Caption = 'placa'
+    FocusControl = DBEdit5
+  end
+  object Label6: TLabel
+    Left = 336
+    Top = 48
+    Width = 30
+    Height = 13
+    Caption = 'chasis'
+    FocusControl = DBEdit6
+  end
+  object Label7: TLabel
+    Left = 336
+    Top = 88
+    Width = 17
+    Height = 13
+    Caption = 'tipo'
+    FocusControl = DBEdit7
+  end
+  object Label8: TLabel
+    Left = 16
+    Top = 128
+    Width = 190
+    Height = 24
+    Caption = 'Creditos Aprovados '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMaroon
+    Font.Height = -19
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label9: TLabel
+    Left = 16
+    Top = 256
+    Width = 166
+    Height = 24
+    Caption = 'Pagos por credito'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clGreen
+    Font.Height = -19
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label10: TLabel
+    Left = 16
+    Top = 400
+    Width = 171
+    Height = 24
+    Caption = 'Gastos por credito'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clTeal
+    Font.Height = -19
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label11: TLabel
+    Left = 552
+    Top = 24
+    Width = 54
+    Height = 13
+    Caption = 'Buscar por:'
+  end
+  object Label12: TLabel
+    Left = 496
+    Top = 128
+    Width = 254
+    Height = 20
+    Caption = 'Estatus V = vigente,P = pagado'
+    Color = clBackground
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit1: TDBEdit
+    Left = 16
+    Top = 24
+    Width = 297
+    Height = 21
+    Color = clMoneyGreen
+    DataField = 'Nombre'
+    DataSource = DataSource1
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object DBEdit2: TDBEdit
+    Left = 16
+    Top = 64
+    Width = 199
+    Height = 21
+    Color = clMoneyGreen
+    DataField = 'marcav'
+    DataSource = DataSource1
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object DBEdit3: TDBEdit
+    Left = 16
+    Top = 104
+    Width = 134
+    Height = 21
+    Color = clMoneyGreen
+    DataField = 'modelo'
+    DataSource = DataSource1
+    ReadOnly = True
+    TabOrder = 2
+  end
+  object DBEdit4: TDBEdit
+    Left = 160
+    Top = 104
+    Width = 134
+    Height = 21
+    Color = clMoneyGreen
+    DataField = 'ano'
+    DataSource = DataSource1
+    ReadOnly = True
+    TabOrder = 3
+  end
+  object DBEdit5: TDBEdit
+    Left = 336
+    Top = 24
+    Width = 134
+    Height = 21
+    Color = clMoneyGreen
+    DataField = 'placa'
+    DataSource = DataSource1
+    ReadOnly = True
+    TabOrder = 4
+  end
+  object DBEdit6: TDBEdit
+    Left = 336
+    Top = 64
+    Width = 264
+    Height = 21
+    Color = clMoneyGreen
+    DataField = 'chasis'
+    DataSource = DataSource1
+    ReadOnly = True
+    TabOrder = 5
+  end
+  object DBEdit7: TDBEdit
+    Left = 336
+    Top = 104
+    Width = 264
+    Height = 21
+    Color = clMoneyGreen
+    DataField = 'tipo'
+    DataSource = DataSource1
+    ReadOnly = True
+    TabOrder = 6
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 608
+    Top = 72
+    Width = 136
+    Height = 25
+    DataSource = DataSource1
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+    TabOrder = 7
+  end
+  object DBGrid2: TDBGrid
+    Left = 16
+    Top = 280
+    Width = 737
+    Height = 120
+    Color = clMoneyGreen
+    DataSource = DataSource3
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clGreen
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 8
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'cobro_num'
+        Title.Caption = 'Pago'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cod_cliente'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'cred_num'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'cuotas'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'impor_sel'
+        Title.Caption = 'Total pagado'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'descuento'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'impor_rec'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'vuelta'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'tipo_pago'
+        Title.Caption = 'tipo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'fecha'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'usuario'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'letras'
+        Visible = False
+      end>
+  end
+  object DBGrid3: TDBGrid
+    Left = 16
+    Top = 424
+    Width = 737
+    Height = 113
+    Color = clMoneyGreen
+    DataSource = DataSource4
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clTeal
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 9
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'gasto_num'
+        Title.Caption = 'Gasto'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cred_num'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'cod_cliente'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'tipo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'monto'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'descripcion'
+        Width = 500
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Usuario'
+        Visible = False
+      end>
+  end
+  object ComboBox1: TComboBox
+    Left = 608
+    Top = 16
+    Width = 145
+    Height = 21
+    ItemHeight = 13
+    TabOrder = 10
+    Text = 'ComboBox1'
+    Items.Strings = (
+      'cod_cliente'
+      'cedula')
+  end
+  object Edit1: TEdit
+    Left = 608
+    Top = 40
+    Width = 121
+    Height = 21
+    TabOrder = 11
+    OnKeyPress = Edit1KeyPress
+  end
+  object DBGrid1: TDBGrid
+    Left = 16
+    Top = 152
+    Width = 737
+    Height = 105
+    BorderStyle = bsNone
+    Color = clMoneyGreen
+    DataSource = DataSource2
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    ReadOnly = True
+    TabOrder = 12
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'cred_num'
+        Title.Caption = 'no.prestamo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nombrecli'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'importe'
+        Title.Caption = 'Monto'
+        Visible = True
+      end
+      item
+        Color = clAqua
+        Expanded = False
+        FieldName = 'estatus'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cod_cliente'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'fecha'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tasa'
+        Width = 30
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'num_cuotas'
+        Title.Caption = 'no.cuotas'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tipo_venc'
+        Title.Caption = 'Tipo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'venc_primer'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'form_entrega'
+        Title.Caption = 'Entrega'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'letras'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'observaciones'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'capital'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'interes'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'monto_mens'
+        Title.Caption = 'Pagares'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'moras'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'telefono'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'usuario'
+        Visible = False
+      end>
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOQuery1
+    Left = 272
+    Top = 72
+  end
+  object ADOTable2: TADOTable
+    Connection = Data.ADOConnection1
+    CursorType = ctStatic
+    IndexFieldNames = 'cod_cliente'
+    MasterFields = 'cod_cliente'
+    MasterSource = DataSource1
+    TableName = 'credito'
+    Left = 320
+    Top = 88
+    object ADOTable2cred_num: TAutoIncField
+      FieldName = 'cred_num'
+      ReadOnly = True
+    end
+    object ADOTable2cod_cliente: TIntegerField
+      FieldName = 'cod_cliente'
+    end
+    object ADOTable2fecha: TDateTimeField
+      FieldName = 'fecha'
+    end
+    object ADOTable2tasa: TWideStringField
+      FieldName = 'tasa'
+      Size = 15
+    end
+    object ADOTable2importe: TBCDField
+      FieldName = 'importe'
+      Precision = 19
+    end
+    object ADOTable2num_cuotas: TIntegerField
+      FieldName = 'num_cuotas'
+    end
+    object ADOTable2tipo_venc: TWideStringField
+      FieldName = 'tipo_venc'
+      Size = 10
+    end
+    object ADOTable2venc_primer: TDateTimeField
+      FieldName = 'venc_primer'
+    end
+    object ADOTable2form_entrega: TWideStringField
+      FieldName = 'form_entrega'
+    end
+    object ADOTable2letras: TWideStringField
+      FieldName = 'letras'
+      Size = 50
+    end
+    object ADOTable2observaciones: TWideStringField
+      FieldName = 'observaciones'
+      Size = 255
+    end
+    object ADOTable2capital: TWideStringField
+      FieldName = 'capital'
+      Size = 255
+    end
+    object ADOTable2interes: TWideStringField
+      FieldName = 'interes'
+      Size = 12
+    end
+    object ADOTable2monto_mens: TWideStringField
+      FieldName = 'monto_mens'
+      Size = 12
+    end
+    object ADOTable2estatus: TWideStringField
+      FieldName = 'estatus'
+      Size = 2
+    end
+    object ADOTable2moras: TWideStringField
+      FieldName = 'moras'
+      Size = 2
+    end
+    object ADOTable2nombrecli: TWideStringField
+      FieldName = 'nombrecli'
+      Size = 70
+    end
+    object ADOTable2telefono: TWideStringField
+      FieldName = 'telefono'
+      Size = 15
+    end
+    object ADOTable2usuario: TWideStringField
+      FieldName = 'usuario'
+    end
+  end
+  object DataSource2: TDataSource
+    DataSet = ADOTable2
+    Left = 240
+    Top = 136
+  end
+  object ADOQuery1: TADOQuery
+    Connection = Data.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from cliente where nombre <> null')
+    Left = 232
+    Top = 72
+  end
+  object ADOTable1: TADOTable
+    Connection = Data.ADOConnection1
+    CursorType = ctStatic
+    IndexFieldNames = 'cod_cliente;cred_num'
+    MasterFields = 'cod_cliente;cred_num'
+    MasterSource = DataSource2
+    TableName = 'tcobros'
+    Left = 368
+    Top = 304
+  end
+  object DataSource3: TDataSource
+    DataSet = ADOTable1
+    Left = 416
+    Top = 312
+  end
+  object ADOTable3: TADOTable
+    Connection = Data.ADOConnection1
+    CursorType = ctStatic
+    IndexFieldNames = 'cred_num;cod_cliente'
+    MasterFields = 'cred_num;cod_cliente'
+    MasterSource = DataSource3
+    TableName = 'gastos'
+    Left = 320
+    Top = 464
+  end
+  object DataSource4: TDataSource
+    DataSet = ADOTable3
+    Left = 384
+    Top = 456
+  end
+end

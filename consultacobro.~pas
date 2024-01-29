@@ -1,0 +1,109 @@
+unit consultacobro;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ComCtrls, Grids, DBGrids, DB, Mask, DBCtrls,
+  ExtCtrls;
+
+type
+  Tconsultacob = class(TForm)
+    DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    Label1: TLabel;
+    Label2: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    Edit1: TEdit;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    DataSource2: TDataSource;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    Label5: TLabel;
+    DBEdit3: TDBEdit;
+    DBNavigator1: TDBNavigator;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  consultacob: Tconsultacob;
+
+implementation
+
+uses Unit2, creespacificos;
+
+{$R *.dfm}
+
+procedure Tconsultacob.BitBtn1Click(Sender: TObject);
+begin
+data.cobrolis.Active:=true;
+data.cobrolis.Close;
+   data.cobrolis.SQL.Clear;
+   data.cobrolis.SQL.Add('select cobro_num,cod_cliente,cred_num,cuotas,impor_sel,descuento,tipo_pago,fecha from tcobros');
+   data.cobrolis.SQL.Add('where impor_sel >'+edit1.Text);
+   data.cobrolis.SQL.Add('and fecha >=:fecha1 and fecha <=:fecha2');
+  data.cobrolis.Parameters.ParamByName('fecha1').value := datetostr(DateTimePicker1.Date);
+   data.cobrolis.Parameters.ParamByName('fecha2').value := datetostr(DateTimePicker2.date);
+   data.cobrolis.Open;
+   if data.cobrolis.Eof then
+   begin
+   Messagedlg('No hay para este rango de fechas',MTerror,[mbok],0);
+   data.seltocorb.Active:=false;
+   end
+   else
+   begin
+   data.seltocorb.Active:=true;
+   data.seltocorb.Close;
+   data.seltocorb.SQL.Clear;
+   data.seltocorb.SQL.Add('select count(cobro_num) as totcobr,sum(cuotas) as totcuo,sum(impor_sel) as total from tcobros');
+  data.seltocorb.SQL.Add('where impor_sel >'+edit1.Text);
+   data.seltocorb.SQL.Add('and fecha >=:fecha1 and fecha <=:fecha2');
+  data.seltocorb.Parameters.ParamByName('fecha1').value := datetostr(DateTimePicker1.Date);
+   data.seltocorb.Parameters.ParamByName('fecha2').value := datetostr(DateTimePicker2.date);
+   data.seltocorb.Open;
+
+   
+   end;
+end;
+
+procedure Tconsultacob.BitBtn2Click(Sender: TObject);
+begin
+if data.cobrolis.Active = false then
+begin
+showmessage('realice consulta');
+end
+else
+begin
+listaporcred.QRLabel4.Caption:=datetostr(datetimepicker1.date);
+listaporcred.QRLabel5.Caption:=datetostr(datetimepicker2.date);
+
+listaporcred.cobros.preview;
+end;
+end;
+
+procedure Tconsultacob.FormCreate(Sender: TObject);
+begin
+datetimepicker1.DateTime:=(now);
+datetimepicker2.DateTime:=(now);
+end;
+
+procedure Tconsultacob.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+data.cobrolis.Active:=false;
+data.seltocorb.Active:=false;
+canclose:=true;
+end;
+
+end.

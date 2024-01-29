@@ -1,0 +1,132 @@
+unit congastos;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, DBCtrls, ComCtrls, StdCtrls, Buttons, Grids, DBGrids,math;
+
+type
+  Tcongasto = class(TForm)
+    ProgressBar1: TProgressBar;
+    ProgressBar2: TProgressBar;
+    ProgressBar3: TProgressBar;
+    ProgressBar4: TProgressBar;
+    Label1: TLabel;
+    Label2: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  congasto: Tcongasto;
+
+implementation
+
+uses Unit2, condeuda;
+
+{$R *.dfm}
+procedure actualizar;
+begin
+data.fechaact.Edit;
+data.fechaact.FieldByName('fcha').Value:=datetostr(now);
+data.fechaact.Post;
+data.cuotaac.Filtered:=true;
+data.cuotaac.Filter:='estatus='+#39+consutadeuda.Edit3.Text+#39;
+data.cuotaac.First;
+while not(data.cuotaac.Eof) do
+begin
+data.cuotaac.Edit;
+consutadeuda.dbgrid1.Fields[8].AsFloat:= strtofloat(consutadeuda.dbgrid1.Fields[5].Value) + strtofloat (consutadeuda.dbgrid1.Fields[6].Value) +strtofloat(consutadeuda.dbgrid1.Fields[7].Value);
+data.cuotaac.Post;
+congasto.ProgressBar1.StepIt;
+data.cuotaac.Next;
+end;
+begin
+data.cuotaac.First;
+while not(data.cuotaac.Eof) do
+begin
+if (consutadeuda.edit2.Text <= consutadeuda.dbgrid1.Fields[2].value) then
+begin
+data.cuotaac.Edit;
+consutadeuda.dbgrid1.Fields[3].AsInteger:= 0;
+data.cuotaac.Post;
+congasto.ProgressBar2.StepIt;
+data.cuotaac.Next;
+end
+else
+begin
+data.cuotaac.Edit;
+consutadeuda.dbgrid1.Fields[3].AsInteger:=(trunc(strtodate(consutadeuda.edit2.Text)-strtodate(FormatDateTime('dd/mm/yy',consutadeuda.dbgrid1.Fields[2].value)))) ;
+ data.cuotaac.Post;
+ congasto.ProgressBar2.StepIt;
+data.cuotaac.Next;
+end;
+end;
+ end;
+ begin
+ data.cuotaac.First;
+ while not(data.cuotaac.Eof) do
+begin
+if (consutadeuda.dbgrid1.Fields[3].Value > 5) then
+begin
+data.cuotaac.edit;
+consutadeuda.dbgrid1.Fields[4].AsFloat:= (RoundTo(strtofloat(consutadeuda.dbgrid1.Fields[8].Value) * 0.0033 * strtofloat(consutadeuda.dbgrid1.Fields[3].Value) ,-2));
+data.cuotaac.Post;
+data.cuotaac.edit;
+consutadeuda.dbgrid1.Fields[8].AsFloat:= strtofloat(consutadeuda.dbgrid1.Fields[5].Value) + strtofloat (consutadeuda.dbgrid1.Fields[6].Value) +strtofloat(consutadeuda.dbgrid1.Fields[7].Value)+strtofloat(consutadeuda.dbgrid1.Fields[4].Value);
+data.cuotaac.FieldByName('condicion').Value:='s';
+data.cuotaac.Post;
+data.tcredito.Active:=true;
+data.tcredito.Locate('cred_num',data.cuotaac.fieldbyname('cred_num').Value,[]);
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:='s';
+data.tcredito.Post;
+congasto.ProgressBar3.StepIt;
+data.cuotaac.Next;
+end
+else
+begin
+data.cuotaac.edit;
+consutadeuda.dbgrid1.Fields[4].AsFloat:= 0;
+data.cuotaac.Post;
+data.cuotaac.edit;
+data.cuotaac.FieldByName('condicion').Value:='n';
+data.cuotaac.Post;
+data.tcredito.Active:=true;
+data.tcredito.Locate('cred_num',data.cuotaac.fieldbyname('cred_num').Value,[]);
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:='n';
+data.tcredito.Post;
+congasto.ProgressBar3.StepIt;
+data.cuotaac.Next;
+end;
+end;
+ end;
+ begin
+ data.cuotaac.Filter:='estatus='+#39+consutadeuda.Edit3.Text+#39+' and condicion='+#39+consutadeuda.Edit5.Text+#39;
+ data.cuotaac.First;
+ while not (data.cuotaac.Eof) do
+begin
+data.tcredito.Locate('cred_num',data.cuotaac.fieldbyname('cred_num').Value,[]);
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:= 's';
+data.tcredito.Post;
+congasto.ProgressBar4.StepIt;
+data.cuotaac.Next;
+end;
+end;
+end;
+
+procedure Tcongasto.BitBtn1Click(Sender: TObject);
+begin
+
+actualizar;
+end;
+
+end.

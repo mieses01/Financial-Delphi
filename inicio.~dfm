@@ -1,0 +1,67 @@
+object spla: Tspla
+  Left = 175
+  Top = 140
+  BorderStyle = bsNone
+  Caption = 'spla'
+  ClientHeight = 456
+  ClientWidth = 703
+  Color = clMaroon
+  TransparentColor = True
+  TransparentColorValue = clMaroon
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 288
+    Top = 152
+    Width = 96
+    Height = 35
+    Caption = 'FAP 1.0'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -24
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 144
+    Top = 184
+    Width = 395
+    Height = 29
+    Caption = 'Facil administracion de prestamos'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -24
+    Font.Name = 'Snap ITC'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 144
+    Top = 248
+    Width = 114
+    Height = 21
+    Caption = 'Cargando.......'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -15
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object ProgressBar1: TProgressBar
+    Left = 144
+    Top = 216
+    Width = 393
+    Height = 25
+    Step = 5
+    TabOrder = 0
+  end
+end

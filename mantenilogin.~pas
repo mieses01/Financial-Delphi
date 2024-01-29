@@ -1,0 +1,155 @@
+unit mantenilogin;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, DB, Mask, DBCtrls, Spin;
+
+type
+  Tmantlogin = class(TForm)
+    Label1: TLabel;
+    DataSource1: TDataSource;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    Edit1: TEdit;
+    Label6: TLabel;
+    SpinEdit1: TSpinEdit;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Edit2: TEdit;
+    Label10: TLabel;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure Edit4KeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  mantlogin: Tmantlogin;
+
+implementation
+
+uses Unit2;
+
+{$R *.dfm}
+
+procedure Tmantlogin.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then
+begin
+if edit1.Text='' then
+begin
+showmessage('digite nombre de usuario');
+end
+else
+begin
+if not data.usuario.Locate('Usuario',edit1.Text,[]) then
+begin
+showmessage('Usuario no existe');
+end
+else
+begin
+edit3.Text:=data.usuario.FieldByName('Usuario').Value;
+edit4.Text:=data.usuario.FieldByName('clave').Value;
+spinedit1.Text:=data.usuario.FieldByName('tipo').Value;
+edit5.Text:=data.usuario.FieldByName('nombre').Value;
+edit6.Text:=data.usuario.FieldByName('cedula').Value;
+end;
+end;
+end;
+end;
+procedure Tmantlogin.BitBtn1Click(Sender: TObject);
+begin
+edit3.ReadOnly:=false;
+edit4.ReadOnly:=false;
+edit5.ReadOnly:=false;
+edit6.ReadOnly:=false;
+edit2.ReadOnly:=false;
+spinedit1.ReadOnly:=false;
+edit3.Clear;
+edit4.Clear;
+edit5.Clear;
+edit6.Clear;
+edit2.Clear;
+data.usuario.Insert;
+end;
+
+procedure Tmantlogin.BitBtn2Click(Sender: TObject);
+begin
+data.usuario.edit;
+end;
+
+procedure Tmantlogin.BitBtn3Click(Sender: TObject);
+begin
+if  (edit2.Text = '') or (edit4.Text = '') or (edit5.Text = '')or (edit3.Text = '')then
+begin
+showmessage('complete los campos');
+end
+else
+begin
+if (edit2.Text<>edit4.Text) then
+begin
+showmessage('verifique  su clave');
+end
+else
+begin
+data.usuario.FieldByName('Usuario').Value:=edit3.Text;
+data.usuario.FieldByName('clave').Value:=strtoint(edit4.Text);
+data.usuario.FieldByName('tipo').Value:=strtoint(spinedit1.Text);
+data.usuario.FieldByName('Nombre').Value:=edit5.Text;
+data.usuario.FieldByName('cedula').Value:=edit6.Text;
+
+data.usuario.post;
+MessageDlg('¿Usuario registrado!!?',mtConfirmation,[MBYes],0)
+
+end;
+end;
+end;
+
+procedure Tmantlogin.BitBtn4Click(Sender: TObject);
+begin
+If MessageDlg('¿Está usted  seguro que desea cancelar este Usuario?',mtConfirmation,[MBYes,MBNo],0) = MrYEs then
+begin
+data.usuario.Delete;
+edit3.ReadOnly:=false;
+edit4.ReadOnly:=false;
+edit5.ReadOnly:=false;
+edit6.ReadOnly:=false;
+edit2.ReadOnly:=false;
+spinedit1.ReadOnly:=false;
+edit3.Clear;
+edit4.Clear;
+edit5.Clear;
+edit6.Clear;
+edit2.Clear;
+end;
+end;
+
+procedure Tmantlogin.Edit4KeyPress(Sender: TObject; var Key: Char);
+begin
+if key in ['0'..'9',#8] then
+else 
+begin 
+key := #0; 
+end;
+end;
+
+end.

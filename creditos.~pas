@@ -1,0 +1,496 @@
+unit creditos;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs,dateutils, StdCtrls, ComCtrls, DBCtrls, ExtCtrls, Mask, DB,
+  Grids, DBGrids, Buttons, ToolWin,math, Spin;
+
+type
+  Tcredito = class(TForm)
+    Label9: TLabel;
+    Label11: TLabel;
+    DBGrid1: TDBGrid;
+    GroupBox1: TGroupBox;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    DBText1: TDBText;
+    Label3: TLabel;
+    Label12: TLabel;
+    Label8: TLabel;
+    DateTimePicker1: TDateTimePicker;
+    Label2: TLabel;
+    ToolBar1: TToolBar;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    Label7: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    BitBtn6: TBitBtn;
+    BitBtn7: TBitBtn;
+    Label15: TLabel;
+    Timer1: TTimer;
+    ToolButton1: TToolButton;
+    GroupBox2: TGroupBox;
+    Label10: TLabel;
+    Label16: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    numerocuota: TSpinEdit;
+    Edit1: TEdit;
+    Label17: TLabel;
+    DBNavigator1: TDBNavigator;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    Label18: TLabel;
+    OO: TDBEdit;
+    tasa: TEdit;
+    importe: TEdit;
+    capicuota: TEdit;
+    interecuota: TEdit;
+    montocuota: TEdit;
+    Memo1: TMemo;
+    BitBtn8: TBitBtn;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    procedure Button1Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure BitBtn7Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
+    procedure SpinEdit1Change(Sender: TObject);
+    procedure numerocuotaChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBLookupComboBox1Click(Sender: TObject);
+    procedure tasaKeyPress(Sender: TObject; var Key: Char);
+    procedure importeKeyPress(Sender: TObject; var Key: Char);
+    procedure tasaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure importeChange(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure BitBtn8Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  credito: Tcredito;
+
+implementation
+
+uses Unit2, reportecred, ucliente, buscacli;
+
+{$R *.dfm}
+
+procedure limpia;
+begin
+credito.edit1.Clear;
+credito.edit2.Clear;
+credito.edit3.Clear;
+credito.edit4.Clear;
+credito.tasa.Clear;
+credito.importe.Clear;
+credito.capicuota.Clear;
+credito.interecuota.Clear;
+credito.montocuota.Clear;
+data.totcred.Active:=false;
+data.tcuotas.Active:=false;
+credito.ComboBox1.ItemIndex:=0;
+credito.ComboBox2.ItemIndex:=0;
+credito.BitBtn7.Enabled:=false;
+
+
+end;
+
+procedure Tcredito.Button1Click(Sender: TObject);
+var
+x:integer;
+begin
+x:=1;
+while(x<=strtoint(numerocuota.Text))do
+begin
+dateTimePicker1.Date := Incweek(DateTimePicker1.Date, 1);
+data.tcuotas.Insert;
+ data.tcuotas.FieldByName('no_cuota').Value := x;
+ data.tcuotas.FieldByName('fecha_venc').Value := datetimepicker1.Date;
+ data.tcuotas.Post;
+ x:=x+1;
+end;
+end;
+
+procedure Tcredito.BitBtn1Click(Sender: TObject);
+begin
+data.tcredito.Active:=true;
+edit2.Enabled:=true;
+edit3.Enabled:=true;
+edit4.Enabled:=true;
+//dblookupcombobox1.Enabled:=true;
+//dbedit2.Enabled;
+speedbutton1.Enabled:=true;
+  speedbutton2.Enabled:=true;
+bitbtn2.Enabled:=true;
+bitbtn3.Enabled:=true;
+bitbtn5.Enabled:=true;
+bitbtn6.Enabled:=true;
+bitbtn4.Enabled:=true;
+tasa.Enabled:=true;
+combobox1.Enabled:=true;
+importe.Enabled:=true;
+numerocuota.Enabled:=true;
+datetimepicker1.Enabled:=true;
+capicuota.Enabled:=true;
+interecuota.Enabled:=true;
+montocuota.Enabled:=true;
+edit1.Enabled:=true;
+combobox2.Enabled:=true;
+dbnavigator1.Enabled:=true;
+memo1.Enabled:=true;
+datetimepicker1.DateTime:=(now);
+data.datasource1.DataSet:=data.tcredito;
+data.tcredito.Insert;
+tasa.ReadOnly:=false;
+importe.ReadOnly:=false;
+numerocuota.Enabled:=true;
+combobox1.Enabled:=true;
+combobox2.Enabled:=true;
+memo1.ReadOnly:=false;
+limpia;
+end;
+
+procedure Tcredito.BitBtn2Click(Sender: TObject);
+begin
+if (data.tcredito.State = dsinsert) or (data.tcredito.State = dsedit) then
+begin
+bitbtn4.Enabled:=true;
+if edit2.Text = '' then
+begin
+Messagedlg('Debe elegir un cliente',MTerror,[mbok],0);
+end
+else
+begin
+if (montocuota.Text='')then
+begin
+Messagedlg('Primero presione boton carcular',MTerror,[mbok],0);
+end
+else
+begin
+bitbtn7.Enabled:=true;
+bitbtn8.Enabled:=true;
+data.tcredito.FieldByName('cod_cliente').Value:=strtoint(edit2.Text);
+data.tcredito.FieldByName('fecha').Value:=label15.Caption;
+data.tcredito.FieldByName('num_cuotas').Value:=strtoint(numerocuota.Text);
+data.tcredito.FieldByName('tipo_venc').Value:=combobox1.Text;
+data.tcredito.FieldByName('form_entrega').Value:=combobox2.Text;
+data.tcredito.FieldByName('nombrecli').Value:=data.buscacli.fieldbyname('nombre').Value;
+data.tcredito.FieldByName('telefono').Value:=data.buscacli.fieldbyname('tel').Value;
+data.tcredito.FieldByName('estatus').Value:= 'v';
+data.tcredito.FieldByName('usuario').Value:=data.usuario.fieldbyname('usuario').Value;
+data.tcredito.FieldByName('tasa').Value:=tasa.Text;
+data.tcredito.FieldByName('importe').Value:=strtoint(importe.Text);
+data.tcredito.FieldByName('capital').Value:=capicuota.Text;
+data.tcredito.FieldByName('interes').Value:=interecuota.Text;
+data.tcredito.FieldByName('monto_mens').Value:=montocuota.Text;
+data.tcredito.FieldByName('observaciones').Value:=memo1.Text;
+ data.tcredito.Post;
+Messagedlg('Credito registrado!!',MTinformation,[mbok],0);
+//tasa.ReadOnly:=true;
+//importe.ReadOnly:=true;
+//numerocuota.Enabled:=false;
+//combobox1.Enabled:=false;
+//combobox2.Enabled:=false;
+//memo1.ReadOnly:=true;
+//ataki
+end;
+end;
+end
+else
+begin
+Messagedlg('Debe presionar nuevo o editar',MTerror,[mbok],0);
+end;
+end;
+
+procedure Tcredito.Timer1Timer(Sender: TObject);
+begin
+label15.Caption := datetostr(now);
+end;
+
+procedure Tcredito.BitBtn7Click(Sender: TObject);
+var
+x:integer;
+begin
+data.tcuotas.Active:=true;
+data.totcred.Active:=true;
+if not data.tcuotas.Locate('cred_num',dbtext1.Caption,[]) then
+begin
+data.datasource2.DataSet:=data.tcuotas;
+x:=1;
+while(x<=strtoint(numerocuota.Text))do
+begin
+if combobox1.ItemIndex= 0 then
+begin
+dateTimePicker1.Date := Incmonth(DateTimePicker1.Date, 1);
+end
+else
+begin
+dateTimePicker1.Date := Incweek(DateTimePicker1.Date, 1);
+end;
+
+data.tcuotas.Insert;
+data.tcuotas.FieldByName('cred_num').Value := dbtext1.Caption;
+ data.tcuotas.FieldByName('no_cuota').Value := x;
+ data.tcuotas.FieldByName('fecha_venc').Value := datetimepicker1.Date;
+  data.tcuotas.FieldByName('capital').Value := capicuota.Text;
+  data.tcuotas.FieldByName('interes').Value := interecuota.Text;
+ data.tcuotas.FieldByName('impor_total').Value := montocuota.Text;
+ data.tcuotas.FieldByName('cod_cliente').Value:= edit2.Text;
+ data.tcuotas.FieldByName('dias_demora').Value:= 0;
+ data.tcuotas.FieldByName('imporxmora').Value:= 0;
+ data.tcuotas.FieldByName('gastos_l').Value:= 0;
+ data.tcuotas.FieldByName('otros').Value:= 0;
+ data.tcuotas.FieldByName('estatus').Value:= 'v';
+ data.tcuotas.FieldByName('tot_pagar').Value:=montocuota.Text;
+ data.tcuotas.Post;
+ x:=x+1;
+
+ end;
+ end
+ else
+ begin
+ showmessage('La cuenta ya fue creada!!');
+ end;
+ data.DATASOURCE4.DataSet:= DATA.totcred;
+ data.totcred.Close;
+ data.totcred.SQL.Clear;
+ data.totcred.SQL.Add('select sum(impor_total)as total from cuotas where cred_num ='+ dbtext1.Caption);
+ data.totcred.Open;
+ datetimepicker1.DateTime:=(now);
+end;
+
+procedure Tcredito.BitBtn3Click(Sender: TObject);
+begin
+data.tcredito.Edit;
+end;
+
+procedure Tcredito.BitBtn6Click(Sender: TObject);
+var
+inpor,numcuo,capi,tas,intere:real;
+begin
+if (tasa.Text = '') then
+begin
+Messagedlg('Debe digitar la tasa de interes',MTerror,[mbok],0);
+ end
+ else
+ begin
+ if (importe.Text='') then
+ begin
+ Messagedlg('Debe digitar el importe o monto solicitado',MTerror,[mbok],0);
+ end
+ else
+ begin
+inpor:=strtofloat(importe.Text);
+numcuo:=strtofloat(numerocuota.Text);
+capi:= inpor / numcuo;
+capicuota.Text:= floattostr (RoundTo (capi, -2 )) ;
+
+tas:=strtofloat(tasa.Text);
+intere:= tas /100 * inpor * numcuo /numcuo ;
+interecuota.Text:= floattostr (RoundTo (intere, -2 ));
+montocuota.Text:= floattostr (RoundTo (capi + intere, -2 ))
+end;
+end;
+end;
+
+procedure Tcredito.SpinEdit1Change(Sender: TObject);
+begin
+numerocuota.Text:= numerocuota.Text;
+end;
+
+procedure Tcredito.numerocuotaChange(Sender: TObject);
+begin
+numerocuota.Text:= numerocuota.Text;
+end;
+
+procedure Tcredito.FormCreate(Sender: TObject);
+begin
+datetimepicker1.DateTime:=(now);
+combobox2.ItemIndex:= 0;
+combobox1.ItemIndex:=0;
+edit2.Clear;
+edit3.Clear;
+edit4.Clear;
+
+end;
+
+procedure Tcredito.DBLookupComboBox1Click(Sender: TObject);
+begin
+//dbedit1.DataSource:=data.datasource3;
+//dbedit1.DataField:='cod_cliente';
+//dbedit2.DataSource:=data.datasource3;
+//dbedit2.DataField:='direccion';
+
+end;
+
+procedure Tcredito.tasaKeyPress(Sender: TObject; var Key: Char);
+
+begin
+if key in ['0' ..'9','.',#8] then
+else
+begin 
+key := #0; 
+end;
+end;
+
+procedure Tcredito.importeKeyPress(Sender: TObject; var Key: Char);
+begin
+if key in ['0' ..'9',#8] then 
+else 
+begin 
+key := #0; 
+end;
+edit1.Text:=importe.Text;
+end;
+
+procedure Tcredito.tasaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+if key =13 then
+ 				  begin
+ 						 importe.setfocus;
+ 				   end;
+end;
+
+procedure Tcredito.importeChange(Sender: TObject);
+begin
+edit1.Text:= importe.Text;
+end;
+
+procedure Tcredito.BitBtn5Click(Sender: TObject);
+begin
+
+reportcredito.QuickRep1.Preview;
+end;
+
+procedure Tcredito.SpeedButton1Click(Sender: TObject);
+begin
+clientes.showmodal;
+end;
+
+procedure Tcredito.BitBtn4Click(Sender: TObject);
+var
+d:integer;
+begin
+If MessageDlg('¿Está usted  seguro que desea cancelar este credito?',mtConfirmation,[MBYes,MBNo],0) = MrYEs then
+begin
+if dbtext1.Caption = '' then
+begin
+bitbtn2.Enabled:=false;
+bitbtn3.Enabled:=false;
+bitbtn4.Enabled:=false;
+bitbtn5.Enabled:=false;
+bitbtn7.Enabled:=false;
+limpia;
+data.tcredito.Active:=false;
+end
+else
+begin
+if (data.tcuotas.Active = false) and (dbtext1.Caption <> '') then
+begin
+data.tcredito.Locate('cred_num',dbtext1.Caption,[]);
+data.tcredito.delete;
+limpia;
+bitbtn2.Enabled:=false;
+bitbtn3.Enabled:=false;
+bitbtn4.Enabled:=false;
+bitbtn5.Enabled:=false;
+bitbtn7.Enabled:=false;
+data.tcredito.Active:=false;
+end
+else
+begin
+d:=1;
+data.tcuotas.First;
+while (d<=strtoint(numerocuota.Text)) do
+begin
+data.tcuotas.Delete;
+data.tcuotas.Next;
+d:= d+1;
+end;
+data.totcred.Active:=false;
+data.tcredito.Active:=false;
+end;
+//data.tcredito.Post
+data.tcredito.Active:=true;
+data.tcredito.Locate('cred_num',dbtext1.Caption,[]);
+data.tcredito.Delete;
+bitbtn4.Enabled:=false;
+limpia;
+bitbtn2.Enabled:=false;
+bitbtn3.Enabled:=false;
+bitbtn4.Enabled:=false;
+bitbtn5.Enabled:=false;
+bitbtn7.Enabled:=false;
+data.tcredito.Active:=false;
+ end;
+ end;
+ end;
+procedure Tcredito.SpeedButton2Click(Sender: TObject);
+begin
+data.buscacli.Active:=true;
+buscacliente := Tbuscacliente.Create(Self);
+buscacliente.showmodal;
+end;
+
+procedure Tcredito.BitBtn8Click(Sender: TObject);
+var
+d:integer;
+begin
+if data.tcuotas.Active = false then
+begin
+showmessage('No hay cuenta!!') ;
+end
+else
+begin
+d:=1;
+data.tcuotas.First;
+while (d<=strtoint(numerocuota.Text)) do
+begin
+data.tcuotas.Delete;
+data.tcuotas.Next;
+d:= d+1;
+end;
+data.totcred.Active:=false;
+end;
+end;
+
+procedure Tcredito.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+if (data.tcredito.State = dsinsert) or (data.tcredito.State = dsedit)then
+begin
+showmessage ('Debe guaradr los cambios o cancelar!!');
+canclose:=false;
+end
+else
+begin
+data.tcredito.Active:=false;
+data.tcuotas.Active:=false;
+ end;
+ end;
+end.

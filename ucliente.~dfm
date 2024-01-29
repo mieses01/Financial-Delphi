@@ -1,0 +1,1201 @@
+object clientes: Tclientes
+  Left = 168
+  Top = 57
+  Width = 797
+  Height = 588
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'Clientes'
+  Color = clGradientInactiveCaption
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  ShowHint = True
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 0
+    Width = 625
+    Height = 97
+    Caption = 'Personal'
+    Color = clBtnFace
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 24
+      Top = 24
+      Width = 36
+      Height = 13
+      Caption = 'Codigo:'
+    end
+    object Label2: TLabel
+      Left = 144
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'Nombre:'
+    end
+    object Label3: TLabel
+      Left = 16
+      Top = 48
+      Width = 48
+      Height = 13
+      Caption = 'Direccion:'
+    end
+    object Label4: TLabel
+      Left = 16
+      Top = 72
+      Width = 45
+      Height = 13
+      Caption = 'Telefono:'
+    end
+    object Label5: TLabel
+      Left = 192
+      Top = 72
+      Width = 17
+      Height = 13
+      Caption = 'cel:'
+    end
+    object Label15: TLabel
+      Left = 360
+      Top = 72
+      Width = 35
+      Height = 13
+      Caption = 'cedula:'
+      FocusControl = DBEdit15
+    end
+    object Label32: TLabel
+      Left = 536
+      Top = 16
+      Width = 6
+      Height = 13
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label33: TLabel
+      Left = 536
+      Top = 40
+      Width = 6
+      Height = 13
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label34: TLabel
+      Left = 536
+      Top = 64
+      Width = 6
+      Height = 13
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label35: TLabel
+      Left = 192
+      Top = 64
+      Width = 6
+      Height = 13
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object DBText1: TDBText
+      Left = 64
+      Top = 16
+      Width = 73
+      Height = 25
+      DataField = 'cod_cliente'
+      DataSource = Data.DataSource3
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object DBEdit15: TDBEdit
+      Left = 392
+      Top = 120
+      Width = 199
+      Height = 21
+      DataField = 'cedula'
+      DataSource = Data.DataSource3
+      TabOrder = 0
+    end
+    object MaskEdit4: TMaskEdit
+      Left = 72
+      Top = 64
+      Width = 117
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 3
+      Text = '(   )   -    '
+      OnChange = MaskEdit4Change
+    end
+    object MaskEdit5: TMaskEdit
+      Left = 216
+      Top = 64
+      Width = 119
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 4
+      Text = '(   )   -    '
+      OnChange = MaskEdit5Change
+    end
+    object Edit2: TEdit
+      Left = 192
+      Top = 16
+      Width = 345
+      Height = 21
+      CharCase = ecUpperCase
+      Color = clInfoBk
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      MaxLength = 59
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object Edit3: TEdit
+      Left = 72
+      Top = 40
+      Width = 465
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 99
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object Edit4: TEdit
+      Left = 400
+      Top = 64
+      Width = 137
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 18
+      ReadOnly = True
+      TabOrder = 5
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 8
+    Top = 104
+    Width = 625
+    Height = 137
+    Caption = 'Ingresos'
+    Color = clBtnFace
+    ParentColor = False
+    TabOrder = 1
+    object Label6: TLabel
+      Left = 16
+      Top = 24
+      Width = 44
+      Height = 13
+      Caption = 'Empresa:'
+    end
+    object Label7: TLabel
+      Left = 272
+      Top = 24
+      Width = 43
+      Height = 13
+      Caption = 'telefons1'
+    end
+    object Label8: TLabel
+      Left = 448
+      Top = 24
+      Width = 43
+      Height = 13
+      Caption = 'telefons2'
+    end
+    object Label9: TLabel
+      Left = 8
+      Top = 48
+      Width = 48
+      Height = 13
+      Caption = 'Direccion:'
+    end
+    object Label10: TLabel
+      Left = 32
+      Top = 72
+      Width = 27
+      Height = 13
+      Caption = 'cargo'
+    end
+    object Label11: TLabel
+      Left = 360
+      Top = 72
+      Width = 34
+      Height = 13
+      Caption = 'tiempo:'
+    end
+    object Label12: TLabel
+      Left = 264
+      Top = 96
+      Width = 96
+      Height = 13
+      Caption = 'otra fuente explique:'
+    end
+    object Label13: TLabel
+      Left = 24
+      Top = 96
+      Width = 34
+      Height = 13
+      Caption = 'ingreso'
+    end
+    object Label14: TLabel
+      Left = 240
+      Top = 120
+      Width = 41
+      Height = 13
+      Caption = 'conyuge'
+    end
+    object Label36: TLabel
+      Left = 248
+      Top = 16
+      Width = 6
+      Height = 13
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label41: TLabel
+      Left = 256
+      Top = 88
+      Width = 6
+      Height = 13
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label55: TLabel
+      Left = 8
+      Top = 120
+      Width = 57
+      Height = 13
+      Caption = 'Estado civil:'
+    end
+    object MaskEdit1: TMaskEdit
+      Left = 320
+      Top = 16
+      Width = 119
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 1
+      Text = '(   )   -    '
+      OnChange = MaskEdit1Change
+    end
+    object MaskEdit2: TMaskEdit
+      Left = 496
+      Top = 16
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 2
+      Text = '(   )   -    '
+      OnChange = MaskEdit2Change
+    end
+    object Edit5: TEdit
+      Left = 64
+      Top = 16
+      Width = 177
+      Height = 21
+      Color = clInfoBk
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      MaxLength = 30
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object Edit6: TEdit
+      Left = 64
+      Top = 40
+      Width = 537
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 100
+      ReadOnly = True
+      TabOrder = 3
+    end
+    object Edit7: TEdit
+      Left = 64
+      Top = 64
+      Width = 281
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 30
+      ReadOnly = True
+      TabOrder = 4
+    end
+    object Edit8: TEdit
+      Left = 400
+      Top = 64
+      Width = 121
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 5
+      ReadOnly = True
+      TabOrder = 5
+      OnKeyPress = Edit8KeyPress
+    end
+    object ComboBox2: TComboBox
+      Left = 528
+      Top = 64
+      Width = 73
+      Height = 21
+      Color = clInfoBk
+      Enabled = False
+      ItemHeight = 13
+      TabOrder = 9
+      Text = 'ComboBox2'
+      Items.Strings = (
+        'A'#241'os'
+        'Meses')
+    end
+    object Edit9: TEdit
+      Left = 64
+      Top = 88
+      Width = 193
+      Height = 21
+      Color = clInfoBk
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      MaxLength = 10
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 6
+      OnKeyPress = Edit9KeyPress
+    end
+    object Edit10: TEdit
+      Left = 360
+      Top = 88
+      Width = 241
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 40
+      ReadOnly = True
+      TabOrder = 7
+    end
+    object Edit12: TEdit
+      Left = 288
+      Top = 112
+      Width = 313
+      Height = 21
+      Color = clInfoBk
+      Enabled = False
+      MaxLength = 60
+      ReadOnly = True
+      TabOrder = 8
+    end
+    object ComboBox3: TComboBox
+      Left = 64
+      Top = 112
+      Width = 153
+      Height = 21
+      Color = clInfoBk
+      Enabled = False
+      ItemHeight = 13
+      TabOrder = 10
+      Text = 'ComboBox3'
+      OnClick = ComboBox3Click
+      Items.Strings = (
+        'Soltero'
+        'Casado')
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 8
+    Top = 408
+    Width = 777
+    Height = 137
+    Caption = 'Referencias'
+    Color = clBtnFace
+    ParentColor = False
+    TabOrder = 3
+    object Label29: TLabel
+      Left = 16
+      Top = 16
+      Width = 26
+      Height = 13
+      Caption = 'Tipo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label30: TLabel
+      Left = 128
+      Top = 16
+      Width = 44
+      Height = 13
+      Caption = 'Nombre'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label31: TLabel
+      Left = 360
+      Top = 16
+      Width = 55
+      Height = 13
+      Caption = 'Direccion'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label37: TLabel
+      Left = 560
+      Top = 16
+      Width = 51
+      Height = 13
+      Caption = 'Telefono'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label38: TLabel
+      Left = 664
+      Top = 16
+      Width = 40
+      Height = 13
+      Caption = 'Celular'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object ComboBox4: TComboBox
+      Left = 8
+      Top = 32
+      Width = 113
+      Height = 21
+      Color = clInfoBk
+      Enabled = False
+      ItemHeight = 13
+      MaxLength = 13
+      TabOrder = 16
+      Text = 'ComboBox4'
+      Items.Strings = (
+        'Personal'
+        'Familia'
+        'Amigo'
+        'Comerciales')
+    end
+    object ComboBox5: TComboBox
+      Left = 8
+      Top = 56
+      Width = 113
+      Height = 21
+      Color = clInfoBk
+      Enabled = False
+      ItemHeight = 13
+      MaxLength = 13
+      TabOrder = 17
+      Text = 'ComboBox5'
+      Items.Strings = (
+        'Personal'
+        'Familia'
+        'Amigo'
+        'Comerciales')
+    end
+    object ComboBox6: TComboBox
+      Left = 8
+      Top = 80
+      Width = 113
+      Height = 21
+      Color = clInfoBk
+      Enabled = False
+      ItemHeight = 13
+      MaxLength = 13
+      TabOrder = 18
+      Text = 'ComboBox6'
+      Items.Strings = (
+        'Personal'
+        'Familia'
+        'Amigo'
+        'Comerciales')
+    end
+    object ComboBox7: TComboBox
+      Left = 8
+      Top = 104
+      Width = 113
+      Height = 21
+      Color = clInfoBk
+      Enabled = False
+      ItemHeight = 13
+      MaxLength = 13
+      TabOrder = 19
+      Text = 'ComboBox7'
+      Items.Strings = (
+        'Personal'
+        'Familia'
+        'Amigo'
+        'Comerciales')
+    end
+    object Edit23: TEdit
+      Left = 120
+      Top = 32
+      Width = 241
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 70
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object Edit24: TEdit
+      Left = 120
+      Top = 56
+      Width = 241
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 70
+      ReadOnly = True
+      TabOrder = 4
+    end
+    object Edit25: TEdit
+      Left = 120
+      Top = 80
+      Width = 241
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 70
+      ReadOnly = True
+      TabOrder = 8
+    end
+    object Edit26: TEdit
+      Left = 120
+      Top = 104
+      Width = 241
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 70
+      ReadOnly = True
+      TabOrder = 12
+    end
+    object Edit27: TEdit
+      Left = 360
+      Top = 32
+      Width = 201
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 100
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object Edit28: TEdit
+      Left = 360
+      Top = 56
+      Width = 201
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 100
+      ReadOnly = True
+      TabOrder = 5
+    end
+    object Edit29: TEdit
+      Left = 360
+      Top = 80
+      Width = 201
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 100
+      ReadOnly = True
+      TabOrder = 9
+    end
+    object Edit30: TEdit
+      Left = 360
+      Top = 104
+      Width = 201
+      Height = 21
+      Color = clInfoBk
+      MaxLength = 100
+      ReadOnly = True
+      TabOrder = 13
+    end
+    object MaskEdit7: TMaskEdit
+      Left = 560
+      Top = 32
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 2
+      Text = '(   )   -    '
+    end
+    object MaskEdit8: TMaskEdit
+      Left = 560
+      Top = 56
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 6
+      Text = '(   )   -    '
+    end
+    object MaskEdit9: TMaskEdit
+      Left = 560
+      Top = 80
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 10
+      Text = '(   )   -    '
+    end
+    object MaskEdit10: TMaskEdit
+      Left = 560
+      Top = 104
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 14
+      Text = '(   )   -    '
+    end
+    object MaskEdit11: TMaskEdit
+      Left = 664
+      Top = 32
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 3
+      Text = '(   )   -    '
+    end
+    object MaskEdit12: TMaskEdit
+      Left = 664
+      Top = 56
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 7
+      Text = '(   )   -    '
+    end
+    object MaskEdit13: TMaskEdit
+      Left = 664
+      Top = 80
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 11
+      Text = '(   )   -    '
+    end
+    object MaskEdit14: TMaskEdit
+      Left = 664
+      Top = 104
+      Width = 105
+      Height = 21
+      Color = clInfoBk
+      EditMask = '!\(999\)000-0000;1;_'
+      MaxLength = 13
+      ReadOnly = True
+      TabOrder = 15
+      Text = '(   )   -    '
+    end
+  end
+  object GroupBox6: TGroupBox
+    Left = 640
+    Top = 0
+    Width = 145
+    Height = 97
+    Caption = 'Filtrar por'
+    TabOrder = 4
+    object Edit1: TEdit
+      Left = 8
+      Top = 64
+      Width = 121
+      Height = 21
+      TabOrder = 0
+      OnKeyPress = Edit1KeyPress
+    end
+    object ComboBox1: TComboBox
+      Left = 8
+      Top = 24
+      Width = 121
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 1
+      Text = 'ComboBox1'
+      Items.Strings = (
+        'cod_cliente'
+        'cedula')
+    end
+  end
+  object Panel1: TPanel
+    Left = 640
+    Top = 104
+    Width = 137
+    Height = 137
+    TabOrder = 5
+    object BitBtn1: TBitBtn
+      Left = 32
+      Top = 8
+      Width = 75
+      Height = 25
+      Hint = 'Nuevo'
+      TabOrder = 0
+      OnClick = BitBtn1Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+        333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+        0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333337F33333337F333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333FF7F33333337FFFBBB0FFFFFFFF0BB37777F3333333777F3BB0FFFFFFFF
+        0BBB3777F3333FFF77773330FFFF000003333337F333777773333330FFFF0FF0
+        33333337F3337F37F3333330FFFF0F0B33333337F3337F77FF333330FFFF003B
+        B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+        3BB33773333773333773B333333B3333333B7333333733333337}
+      NumGlyphs = 2
+    end
+    object BitBtn2: TBitBtn
+      Left = 32
+      Top = 40
+      Width = 75
+      Height = 25
+      Hint = 'Guardar'
+      Enabled = False
+      TabOrder = 1
+      OnClick = BitBtn2Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333FFFFFFFFFFFFF33000077777770033377777777777773F000007888888
+        00037F3337F3FF37F37F00000780088800037F3337F77F37F37F000007800888
+        00037F3337F77FF7F37F00000788888800037F3337777777337F000000000000
+        00037F3FFFFFFFFFFF7F00000000000000037F77777777777F7F000FFFFFFFFF
+        00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
+        00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
+        00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
+        0003737FFFFFFFFF7F7330099999999900333777777777777733}
+      NumGlyphs = 2
+    end
+    object BitBtn3: TBitBtn
+      Left = 32
+      Top = 72
+      Width = 75
+      Height = 25
+      Hint = 'Editar'
+      Enabled = False
+      TabOrder = 2
+      OnClick = BitBtn3Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333000000
+        000033333377777777773333330FFFFFFFF03FF3FF7FF33F3FF700300000FF0F
+        00F077F777773F737737E00BFBFB0FFFFFF07773333F7F3333F7E0BFBF000FFF
+        F0F077F3337773F3F737E0FBFBFBF0F00FF077F3333FF7F77F37E0BFBF00000B
+        0FF077F3337777737337E0FBFBFBFBF0FFF077F33FFFFFF73337E0BF0000000F
+        FFF077FF777777733FF7000BFB00B0FF00F07773FF77373377373330000B0FFF
+        FFF03337777373333FF7333330B0FFFF00003333373733FF777733330B0FF00F
+        0FF03333737F37737F373330B00FFFFF0F033337F77F33337F733309030FFFFF
+        00333377737FFFFF773333303300000003333337337777777333}
+      NumGlyphs = 2
+    end
+    object BitBtn4: TBitBtn
+      Left = 32
+      Top = 104
+      Width = 75
+      Height = 25
+      Hint = 'Cancelar'
+      Enabled = False
+      TabOrder = 3
+      OnClick = BitBtn4Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333FFFFF3333333333999993333333333F77777FFF333333999999999
+        33333337777FF377FF3333993370739993333377FF373F377FF3399993000339
+        993337777F777F3377F3393999707333993337F77737333337FF993399933333
+        399377F3777FF333377F993339903333399377F33737FF33377F993333707333
+        399377F333377FF3377F993333101933399377F333777FFF377F993333000993
+        399377FF3377737FF7733993330009993933373FF3777377F7F3399933000399
+        99333773FF777F777733339993707339933333773FF7FFF77333333999999999
+        3333333777333777333333333999993333333333377777333333}
+      NumGlyphs = 2
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 8
+    Top = 248
+    Width = 625
+    Height = 153
+    ActivePage = TabSheet1
+    TabOrder = 2
+    object TabSheet1: TTabSheet
+      Caption = 'Garante'
+      object Label16: TLabel
+        Left = 8
+        Top = 8
+        Width = 38
+        Height = 13
+        Caption = 'Garante'
+      end
+      object Label18: TLabel
+        Left = 8
+        Top = 48
+        Width = 45
+        Height = 13
+        Caption = 'Direccion'
+      end
+      object Label21: TLabel
+        Left = 8
+        Top = 88
+        Width = 45
+        Height = 13
+        Caption = 'Telefono:'
+      end
+      object Label17: TLabel
+        Left = 216
+        Top = 8
+        Width = 33
+        Height = 13
+        Caption = 'Cedula'
+      end
+      object Label22: TLabel
+        Left = 136
+        Top = 88
+        Width = 35
+        Height = 13
+        Caption = 'Celular:'
+      end
+      object Label19: TLabel
+        Left = 424
+        Top = 8
+        Width = 44
+        Height = 13
+        Caption = 'Profesion'
+      end
+      object Label20: TLabel
+        Left = 432
+        Top = 48
+        Width = 36
+        Height = 13
+        Caption = 'Sueldo:'
+      end
+      object MaskEdit3: TMaskEdit
+        Left = 8
+        Top = 104
+        Width = 119
+        Height = 21
+        Color = clInfoBk
+        EditMask = '!\(999\)000-0000;1;_'
+        MaxLength = 13
+        ReadOnly = True
+        TabOrder = 5
+        Text = '(   )   -    '
+        OnChange = MaskEdit3Change
+      end
+      object MaskEdit6: TMaskEdit
+        Left = 136
+        Top = 104
+        Width = 119
+        Height = 21
+        Color = clInfoBk
+        EditMask = '!\(999\)000-0000;1;_'
+        MaxLength = 13
+        ReadOnly = True
+        TabOrder = 6
+        Text = '(   )   -    '
+        OnChange = MaskEdit6Change
+      end
+      object Edit11: TEdit
+        Left = 8
+        Top = 24
+        Width = 201
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 60
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object Edit13: TEdit
+        Left = 216
+        Top = 24
+        Width = 161
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 18
+        ReadOnly = True
+        TabOrder = 1
+        OnKeyPress = Edit13KeyPress
+      end
+      object Edit14: TEdit
+        Left = 424
+        Top = 24
+        Width = 137
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 20
+        ReadOnly = True
+        TabOrder = 2
+      end
+      object Edit15: TEdit
+        Left = 8
+        Top = 64
+        Width = 409
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 100
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object Edit16: TEdit
+        Left = 432
+        Top = 64
+        Width = 129
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 10
+        ReadOnly = True
+        TabOrder = 4
+        OnKeyPress = Edit16KeyPress
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Vehiculo'
+      ImageIndex = 1
+      object Label23: TLabel
+        Left = 16
+        Top = 0
+        Width = 33
+        Height = 13
+        Caption = 'Marca:'
+      end
+      object Label24: TLabel
+        Left = 224
+        Top = 0
+        Width = 38
+        Height = 13
+        Caption = 'Modelo:'
+      end
+      object Label25: TLabel
+        Left = 376
+        Top = 0
+        Width = 19
+        Height = 13
+        Caption = 'A'#241'o'
+      end
+      object Label26: TLabel
+        Left = 16
+        Top = 40
+        Width = 26
+        Height = 13
+        Caption = 'placa'
+      end
+      object Label27: TLabel
+        Left = 160
+        Top = 40
+        Width = 31
+        Height = 13
+        Caption = 'Chasis'
+      end
+      object Label28: TLabel
+        Left = 304
+        Top = 40
+        Width = 17
+        Height = 13
+        Caption = 'tipo'
+      end
+      object Edit17: TEdit
+        Left = 16
+        Top = 16
+        Width = 201
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 15
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object Edit18: TEdit
+        Left = 224
+        Top = 16
+        Width = 137
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 10
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object Edit19: TEdit
+        Left = 376
+        Top = 16
+        Width = 121
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 10
+        ReadOnly = True
+        TabOrder = 2
+        OnKeyPress = Edit19KeyPress
+      end
+      object Edit20: TEdit
+        Left = 16
+        Top = 56
+        Width = 137
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 10
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object Edit21: TEdit
+        Left = 160
+        Top = 56
+        Width = 137
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 20
+        ReadOnly = True
+        TabOrder = 4
+      end
+      object Edit22: TEdit
+        Left = 304
+        Top = 56
+        Width = 201
+        Height = 21
+        Color = clInfoBk
+        MaxLength = 20
+        ReadOnly = True
+        TabOrder = 5
+      end
+    end
+  end
+  object BitBtn5: TBitBtn
+    Left = 640
+    Top = 248
+    Width = 145
+    Height = 57
+    Caption = 'Imprimir datos del cliente'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clGreen
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 6
+    OnClick = BitBtn5Click
+  end
+  object BitBtn6: TBitBtn
+    Left = 640
+    Top = 312
+    Width = 145
+    Height = 49
+    Caption = 'Imprimir lista de clientes'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clGreen
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 7
+    OnClick = BitBtn6Click
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 640
+    Top = 368
+    Width = 144
+    Height = 25
+    DataSource = Data.DataSource3
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+    TabOrder = 8
+    OnClick = DBNavigator1Click
+  end
+  object DataSource1: TDataSource
+    Left = 384
+    Top = 304
+  end
+end

@@ -1,0 +1,577 @@
+unit condeuda;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, DB, ADODB, Mask, DBCtrls, StdCtrls,math, Buttons,
+  ExtCtrls;
+
+type
+  Tconsutadeuda = class(TForm)
+    Label1: TLabel;
+    Label3: TLabel;
+    DBGrid1: TDBGrid;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    DBEdit2: TDBEdit;
+    DataSource1: TDataSource;
+    DataSource2: TDataSource;
+    BitBtn1: TBitBtn;
+    DataSource3: TDataSource;
+    Label2: TLabel;
+    Label4: TLabel;
+    DBEdit1: TDBEdit;
+    DBNavigator1: TDBNavigator;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    DataSource4: TDataSource;
+    Label5: TLabel;
+    DBEdit3: TDBEdit;
+    DataSource5: TDataSource;
+    Label6: TLabel;
+    DBEdit4: TDBEdit;
+    Label7: TLabel;
+    DBEdit5: TDBEdit;
+    Label8: TLabel;
+    DBEdit6: TDBEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    DataSource6: TDataSource;
+    DBEdit7: TDBEdit;
+    DataSource7: TDataSource;
+    BitBtn6: TBitBtn;
+    BitBtn7: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+   // procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
+    procedure BitBtn7Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  consutadeuda: Tconsutadeuda;
+
+implementation
+
+uses Unit2, cobro, pagom, deudacliente, deudaporcl, reppendi, congastos;
+
+
+
+{$R *.dfm}
+
+procedure acondicion;
+var
+a:integer;
+begin
+a:=1;
+data.actualis.First;
+data.tcredito.Active:=true;
+while (a<=data.cont.fieldbyname('cuo').value) do
+begin
+if (data.actualis.FieldByName('imporxmora').Value > 0)then
+begin
+data.actualis.Edit;
+data.actualis.FieldByName('condicion').Value:='s';
+data.actualis.Post;
+data.tcredito.Locate('cred_num',data.actualis.fieldbyname('cred_num').Value,[]);
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:= 's';
+data.tcredito.Post;
+data.actualis.Next;
+a:= a + 1;
+end
+else
+begin
+data.actualis.Edit;
+data.actualis.FieldByName('condicion').Value:='n';
+data.actualis.Post;
+data.tcredito.Locate('cred_num',data.actualis.fieldbyname('cred_num').Value,[]);
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:= 'n';
+data.tcredito.Post;
+data.actualis.Next;
+a:= a + 1;
+
+end;
+end;
+end;
+
+//oooo
+procedure actualizando;
+var
+x,r,v:integer;
+begin
+data.totalescuotas.Active:=true;
+data.ADOQuery2.Active:=true;
+data.tcuotas.Active:=true;
+data.ADOQuery1.Active:=true;
+data.buscacli.Active:=true;
+if consutadeuda.edit1.Text = '' then
+begin
+ Messagedlg('Digite Numero de prestamo',MTinformation,[mbok],0);
+ end
+ else
+ begin
+data.adoquery1.Close;
+data.adoquery1.SQL.Clear;
+data.adoquery1.SQL.Add('select cred_num,no_cuota,fecha_venc,dias_demora,imporxmora,gastos_l,otros,impor_total,tot_pagar,estatus,condicion from cuotas  where  estatus ='+#39+ consutadeuda.edit3.Text +' order by no_cuota' ) ;
+data.adoquery1.Open;
+if data.adoquery1.Eof then
+begin
+
+ Messagedlg('Numero de credito no existe!!',MTinformation,[mbok],0);
+ consutadeuda.dbgrid1.Visible:= false;
+ end
+ else
+ begin
+
+data.adoquery2.Close;
+data.adoquery2.SQL.Clear;
+data.adoquery2.SQL.Add(' select count (no_cuota) as cuo from cuotas where estatus ='+#39+ consutadeuda.edit3.Text +#39+'and cred_num =' + consutadeuda.edit1.Text ) ;
+data.adoquery2.Open;
+end;
+begin
+///ahora
+
+data.buscacli.Locate('cod_cliente',data.tcuotas.fieldbyname('cod_cliente').Value,[]);
+data.ADOQuery1.First;
+v:= 1;
+while (v <= strtoint(consutadeuda.dbedit2.Text)) do
+begin
+data.adoquery1.edit;
+consutadeuda.dbgrid1.Fields[8].AsFloat:= strtofloat(consutadeuda.dbgrid1.Fields[5].Value) + strtofloat (consutadeuda.dbgrid1.Fields[6].Value) +strtofloat(consutadeuda.dbgrid1.Fields[7].Value);
+data.adoquery1.post;
+data.adoquery1.next;
+ v:= v + 1;
+end;
+end;
+data.tcredito.Active:=true;
+data.tcredito.Locate('cred_num',consutadeuda.edit1.Text,[]);
+data.buscacli.Locate('cod_cliente',data.tcredito.fieldbyname('cod_cliente').Value,[]);
+consutadeuda.DBEdit1.DataSource:=data.DataSource9;
+consutadeuda.DBedit1.DataField:='Nombre';
+end;
+begin
+data.adoquery1.First;
+x:=1;
+while (x <= strtoint(consutadeuda.dbedit2.Text)) do
+begin
+if (consutadeuda.edit2.Text <= consutadeuda.dbgrid1.Fields[2].value) then
+begin
+data.adoquery1.Edit;
+consutadeuda.dbgrid1.Fields[3].AsInteger:= 0;
+data.adoquery1.Post;
+data.adoquery1.Next;
+x:= x + 1;
+end
+else
+begin
+data.adoquery1.Edit;
+consutadeuda.dbgrid1.Fields[3].AsInteger:=(trunc(strtodate(consutadeuda.edit2.Text)-strtodate(FormatDateTime('dd/mm/yy',consutadeuda.dbgrid1.Fields[2].value)))) ;
+ data.adoquery1.Post;
+data.adoquery1.Next;
+x:= x + 1;
+end;
+end;
+data.adoquery1.First;
+r:= 1;
+while (r <= strtoint(consutadeuda.dbedit2.Text)) do
+begin
+if (consutadeuda.dbgrid1.Fields[3].Value > 5)  then
+begin
+data.adoquery1.edit;
+consutadeuda.dbgrid1.Fields[4].AsFloat:= (RoundTo(strtofloat(consutadeuda.dbgrid1.Fields[8].Value) * 0.0033 * strtofloat(consutadeuda.dbgrid1.Fields[3].Value) ,-2));
+consutadeuda.dbgrid1.Fields[8].AsFloat:= strtofloat(consutadeuda.dbgrid1.Fields[5].Value) + strtofloat (consutadeuda.dbgrid1.Fields[6].Value) +strtofloat(consutadeuda.dbgrid1.Fields[7].Value)+strtofloat(consutadeuda.dbgrid1.Fields[4].Value);
+data.ADOQuery1.FieldByName('condicion').Value:='s';
+
+data.adoquery1.Post;
+data.adoquery1.Next;
+r:= r + 1;
+end
+else
+begin
+data.adoquery1.edit;
+consutadeuda.dbgrid1.Fields[4].AsFloat:= 0;
+data.ADOQuery1.FieldByName('condicion').Value:='n';
+data.adoquery1.Post;
+data.adoquery1.Next;
+r:= r + 1;
+end;
+end;
+ end;
+ consutadeuda.DBGrid1.Visible:=true;
+ end;
+
+
+//aaaa
+
+
+procedure actualizann;
+var
+x,r,v:integer;
+begin
+data.totalescuotas.Active:=true;
+data.ADOQuery2.Active:=true;
+data.tcuotas.Active:=true;
+data.ADOQuery1.Active:=true;
+data.buscacli.Active:=true;
+if consutadeuda.edit1.Text = '' then
+begin
+// Messagedlg('Digite Numero de prestamo',MTinformation,[mbok],0);
+ consutadeuda.dbgrid1.Visible:= false;
+ end
+ else
+ begin
+data.adoquery1.Close;
+data.adoquery1.SQL.Clear;
+data.adoquery1.SQL.Add('select cred_num,no_cuota,fecha_venc,dias_demora,imporxmora,gastos_l,otros,impor_total,tot_pagar,estatus,condicion from cuotas  where  estatus ='+#39+ consutadeuda.edit3.Text +#39+ ' order by no_cuota' ) ;
+data.adoquery1.Open;
+if data.adoquery1.Eof then
+begin
+
+// Messagedlg('Numero de credito no existe!!',MTinformation,[mbok],0);
+ consutadeuda.dbgrid1.Visible:= false;
+ end
+ else
+ begin
+
+data.adoquery2.Close;
+data.adoquery2.SQL.Clear;
+data.adoquery2.SQL.Add(' select count (no_cuota) as cuo from cuotas where estatus ='+#39+ consutadeuda.edit3.Text +#39 ) ;
+data.adoquery2.Open;
+end;
+begin
+///ahora
+
+data.buscacli.Locate('cod_cliente',data.tcuotas.fieldbyname('cod_cliente').Value,[]);
+data.ADOQuery1.First;
+v:= 1;
+while (v <= strtoint(consutadeuda.dbedit2.Text)) do
+begin
+data.adoquery1.edit;
+consutadeuda.dbgrid1.Fields[8].AsFloat:= strtofloat(consutadeuda.dbgrid1.Fields[5].Value) + strtofloat (consutadeuda.dbgrid1.Fields[6].Value) +strtofloat(consutadeuda.dbgrid1.Fields[7].Value);
+data.adoquery1.post;
+data.adoquery1.next;
+ v:= v + 1;
+end;
+end;
+data.tcredito.Active:=true;
+data.tcredito.Locate('cred_num',consutadeuda.edit1.Text,[]);
+data.buscacli.Locate('cod_cliente',data.tcredito.fieldbyname('cod_cliente').Value,[]);
+consutadeuda.DBEdit1.DataSource:=data.DataSource9;
+consutadeuda.DBedit1.DataField:='Nombre';
+end;
+begin
+data.adoquery1.First;
+x:=1;
+while (x <= strtoint(consutadeuda.dbedit2.Text)) do
+begin
+if (consutadeuda.edit2.Text <= consutadeuda.dbgrid1.Fields[2].value) then
+begin
+data.adoquery1.Edit;
+consutadeuda.dbgrid1.Fields[3].AsInteger:= 0;
+data.adoquery1.Post;
+data.adoquery1.Next;
+x:= x + 1;
+end
+else
+begin
+data.adoquery1.Edit;
+consutadeuda.dbgrid1.Fields[3].AsInteger:=(trunc(strtodate(consutadeuda.edit2.Text)-strtodate(FormatDateTime('dd/mm/yy',consutadeuda.dbgrid1.Fields[2].value)))) ;
+ data.adoquery1.Post;
+data.adoquery1.Next;
+x:= x + 1;
+end;
+end;
+data.adoquery1.First;
+r:= 1;
+while (r <= strtoint(consutadeuda.dbedit2.Text)) do
+begin
+if (consutadeuda.dbgrid1.Fields[3].Value > 5) then
+begin
+data.adoquery1.edit;
+consutadeuda.dbgrid1.Fields[4].AsFloat:= (RoundTo(strtofloat(consutadeuda.dbgrid1.Fields[8].Value) * 0.0033 * strtofloat(consutadeuda.dbgrid1.Fields[3].Value) ,-2));
+consutadeuda.dbgrid1.Fields[8].AsFloat:= strtofloat(consutadeuda.dbgrid1.Fields[5].Value) + strtofloat (consutadeuda.dbgrid1.Fields[6].Value) +strtofloat(consutadeuda.dbgrid1.Fields[7].Value)+strtofloat(consutadeuda.dbgrid1.Fields[4].Value);
+data.ADOQuery1.FieldByName('condicion').Value:='s';
+data.tcredito.Locate('cred_num',data.ADOQuery1.fieldbyname('cred_num').Value,[]);
+data.tcredito.Active:=true;
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:='s';
+data.tcredito.Post;
+data.adoquery1.Post;
+data.adoquery1.Next;
+r:= r + 1;
+end
+else
+begin
+data.adoquery1.edit;
+consutadeuda.dbgrid1.Fields[4].AsFloat:= 0;
+data.ADOQuery1.FieldByName('condicion').Value:='n';
+data.tcredito.Locate('cred_num',data.ADOQuery1.fieldbyname('cred_num').Value,[]);
+data.tcredito.Active:=true;
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:='n';
+data.tcredito.Post;
+data.adoquery1.Post;
+data.adoquery1.Next;
+r:= r + 1;
+end;
+end;
+ end;
+ consutadeuda.DBGrid1.Visible:=true;
+ end;
+
+
+
+
+
+procedure actualiza;
+begin
+data.cuotaac.Filtered:=true;
+data.cuotaac.Filter:='estatus='+#39+consutadeuda.Edit3.Text+#39;
+data.cuotaac.First;
+while not(data.cuotaac.Eof) do
+begin
+data.cuotaac.Edit;
+consutadeuda.dbgrid1.Fields[8].AsFloat:= strtofloat(consutadeuda.dbgrid1.Fields[5].Value) + strtofloat (consutadeuda.dbgrid1.Fields[6].Value) +strtofloat(consutadeuda.dbgrid1.Fields[7].Value);
+data.cuotaac.Post;
+data.cuotaac.Next;
+end;
+begin
+data.cuotaac.First;
+while not(data.cuotaac.Eof) do
+begin
+if (consutadeuda.edit2.Text <= consutadeuda.dbgrid1.Fields[2].value) then
+begin
+data.cuotaac.Edit;
+consutadeuda.dbgrid1.Fields[3].AsInteger:= 0;
+data.cuotaac.Post;
+data.cuotaac.Next;
+end
+else
+begin
+data.cuotaac.Edit;
+consutadeuda.dbgrid1.Fields[3].AsInteger:=(trunc(strtodate(consutadeuda.edit2.Text)-strtodate(FormatDateTime('dd/mm/yy',consutadeuda.dbgrid1.Fields[2].value)))) ;
+ data.cuotaac.Post;
+data.cuotaac.Next;
+end;
+end;
+ end;
+ begin
+ data.cuotaac.First;
+ while not(data.cuotaac.Eof) do
+begin
+if (consutadeuda.dbgrid1.Fields[3].Value > 5) then
+begin
+data.cuotaac.edit;
+consutadeuda.dbgrid1.Fields[4].AsFloat:= (RoundTo(strtofloat(consutadeuda.dbgrid1.Fields[8].Value) * 0.0033 * strtofloat(consutadeuda.dbgrid1.Fields[3].Value) ,-2));
+consutadeuda.dbgrid1.Fields[8].AsFloat:= strtofloat(consutadeuda.dbgrid1.Fields[5].Value) + strtofloat (consutadeuda.dbgrid1.Fields[6].Value) +strtofloat(consutadeuda.dbgrid1.Fields[7].Value)+strtofloat(consutadeuda.dbgrid1.Fields[4].Value);
+data.cuotaac.FieldByName('condicion').Value:='s';
+data.tcredito.Active:=true;
+data.tcredito.Locate('cred_num',data.cuotaac.fieldbyname('cred_num').Value,[]);
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:='s';
+data.tcredito.Post;
+data.cuotaac.Post;
+data.cuotaac.Next;
+end
+else
+begin
+data.cuotaac.edit;
+consutadeuda.dbgrid1.Fields[4].AsFloat:= 0;
+data.cuotaac.FieldByName('condicion').Value:='n';
+data.tcredito.Active:=true;
+data.tcredito.Locate('cred_num',data.cuotaac.fieldbyname('cred_num').Value,[]);
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:='n';
+data.tcredito.Post;
+data.cuotaac.Post;
+data.cuotaac.Next;
+end;
+end;
+ end;
+ begin
+ data.cuotaac.Filter:='estatus='+#39+consutadeuda.Edit3.Text+#39+' and condicion='+#39+consutadeuda.Edit5.Text+#39;
+ data.cuotaac.First;
+ while not (data.cuotaac.Eof) do
+begin
+data.tcredito.Locate('cred_num',data.cuotaac.fieldbyname('cred_num').Value,[]);
+data.tcredito.Edit;
+data.tcredito.FieldByName('moras').Value:= 's';
+data.tcredito.Post;
+data.cuotaac.Next;
+end;
+end;
+
+ end;
+
+procedure Tconsutadeuda.FormCreate(Sender: TObject);
+begin
+edit2.Text:=datetostr(now);
+
+end;
+
+procedure Tconsutadeuda.Button2Click(Sender: TObject);
+var
+r:integer;
+begin
+data.adoquery1.First;
+r:= 1;
+while (r <= strtoint(dbedit2.Text)) do
+begin
+ data.adoquery1.edit;
+dbgrid1.Fields[7].AsFloat:= (RoundTo(strtofloat(dbgrid1.Fields[7].Value) + strtofloat (dbgrid1.Fields[4].Value),-2));
+ data.adoquery1.post;
+data.adoquery1.next;
+r:= r + 1;
+end;
+begin
+ data.adoquery1.First;
+ end;
+end;
+procedure Tconsutadeuda.BitBtn5Click(Sender: TObject);
+begin
+if data.cuotaac.Active = false then
+begin
+ Messagedlg('Debe buscar credito a aplicar !!',MTerror,[mbok],0);
+ end
+ else
+ begin
+ gasto := Tgasto.Create(Self);
+gasto.ShowModal;
+end;
+end;
+
+procedure Tconsutadeuda.BitBtn1Click(Sender: TObject);
+begin
+if edit1.Text='' then
+begin
+showmessage('Digite el numero de prestamo!!');
+end
+else
+begin
+data.cuotaac.Active:=true;
+ data.cuotaac.MasterFields:='';
+ data.cuotaac.IndexFieldNames:='';
+data.cuotaac.Filtered:=true;
+data.cuotaac.Filter:='estatus='+#39+consutadeuda.Edit3.Text+#39+' and cred_num='+consutadeuda.Edit1.Text;
+data.ADOQuery2.Active:=true;
+data.adoquery2.Close;
+data.adoquery2.SQL.Clear;
+data.adoquery2.SQL.Add(' select count (no_cuota) as cuo from cuotas where estatus ='+#39+ consutadeuda.edit3.Text +#39 + 'and cred_num='+edit1.Text ) ;
+data.adoquery2.Open;
+data.totalescuotas.Active:=true;
+data.totalescuotas.Close;
+data.totalescuotas.SQL.Clear;
+data.totalescuotas.SQL.Add('select sum(imporxmora) as moras,sum(gastos_l) as totgasl,sum(otros) as tototro,sum(tot_pagar) as totag from cuotas where estatus ='+#39+ consutadeuda.edit3.Text +#39 + 'and cred_num='+edit1.Text );
+data.totalescuotas.Open;
+data.ADOQuery3.Active:=true;
+if not data.ADOQuery3.Locate('cod_cliente',data.cuotaac.fieldbyname('cod_cliente').Value,[])then
+Messagedlg('cliente fue borrado o modificado!!',MTerror,[mbok],0);
+datasource3.DataSet:=data.ADOQuery3;
+
+if data.cuotaac.Eof then
+begin
+showmessage('No hay cuotas pendiente para este numero!!');
+end
+else
+begin
+dbgrid1.Visible:=true;
+end;
+end;
+end;
+
+procedure Tconsutadeuda.BitBtn4Click(Sender: TObject);
+begin
+if data.cuotaac.Active =false then
+begin
+Messagedlg('Debe seleccionar credito a cobrar',MTerror,[mbok],0);
+end
+else
+begin
+ pagos := Tpagos.Create(Self);
+pagos.showmodal;
+end;
+ end;
+procedure Tconsutadeuda.BitBtn3Click(Sender: TObject);
+begin
+//data.cuotaac.Active:=false;
+//data.cuotaac.Filtered:=false;
+//data.cuotaac.Filter:='';
+//data.tcredito.Filtered:=true;
+//data.tcredito.Filter:='moras='+ #39+consutadeuda.Edit5.Text+#39 +'and estatus='+ #39+consutadeuda.Edit3.Text+#39;
+//data.cuotaac.Filter:='estatus='+ #39+consutadeuda.Edit3.Text+#39;
+//data.cuotaac.Active:=true;
+repordeudacliente.ADOTable1.Active:=true;
+repordeudacliente.ADOTable1.Filtered:=true;
+repordeudacliente.ADOTable1.Filter:='moras='+ #39+consutadeuda.Edit5.Text+#39 +'and estatus='+ #39+consutadeuda.Edit3.Text+#39;
+ repordeudacliente.cuoraep.Active:=true;
+repordeudacliente.cuoraep.MasterSource:=repordeudacliente.creddeuda;
+repordeudacliente.cuoraep.MasterFields:='cred_num;moras;estatus';
+ repordeudacliente.cuoraep.IndexFieldNames:='cred_num;condicion;estatus';
+
+ repordeudacliente.cuoraep.Active:=true;
+ repordeudacliente.deudas.preview;
+//repordeudacliente.Close;
+end;
+
+procedure Tconsutadeuda.SpeedButton1Click(Sender: TObject);
+begin
+repordeudacliente.deudas.preview;
+end;
+
+procedure Tconsutadeuda.BitBtn6Click(Sender: TObject);
+begin
+data.cuotaac.Active:=true;
+data.cuotaac.Filtered:=false;
+data.cuotaac.Filter:='';
+data.cuotaac.MasterSource:=data.DataSource1;
+ data.cuotaac.MasterFields:='cred_num;estatus';
+ data.cuotaac.IndexFieldNames:='cred_num;estatus';
+reportependi.pendienteant.Preview;
+end;
+
+procedure Tconsutadeuda.BitBtn7Click(Sender: TObject);
+begin
+if data.fechaact.FieldByName('fcha').Value = datetostr(now) then
+begin
+showmessage('Los datos fueron actualizados');
+end
+else
+begin
+ congasto := Tcongasto.Create(Self);
+congasto.ShowModal;
+end;
+end;
+
+procedure Tconsutadeuda.BitBtn2Click(Sender: TObject);
+begin
+deudaporl.QRLabel2.caption:=consutadeuda.Edit1.Text;
+deudaporl.especificodeuda.preview;
+end;
+
+procedure Tconsutadeuda.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+repordeudacliente.ADOTable1.Active:=false;
+ repordeudacliente.cuoraep.Active:=false;
+ canclose:=true;
+
+end;
+
+end.

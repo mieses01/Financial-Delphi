@@ -1,0 +1,167 @@
+unit cobro;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, Mask, ExtCtrls, Buttons,math;
+
+type
+  TGasto = class(TForm)
+    Label1: TLabel;
+    DBText1: TDBText;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    ComboBox1: TComboBox;
+    Memo1: TMemo;
+    Edit3: TEdit;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Gasto: TGasto;
+
+implementation
+
+uses Unit2, condeuda;
+
+{$R *.dfm}
+
+procedure agregagasto;
+ var
+monto:real;
+begin
+monto:=strtofloat (gasto.edit3.text);
+data.ADOQuery1.First;
+if gasto.edit3.Text = '' then
+begin
+Messagedlg('Debe digitar el monto!!',MTerror,[mbok],0);
+end
+else
+begin
+data.tablegasto.FieldByName('usuario').Value:=data.usuario.fieldbyname('usuario').Value;
+data.tablegasto.FieldByName('cred_num').Value:=strtoint(gasto.Edit1.Text);
+data.tablegasto.FieldByName('cod_cliente').Value:=strtoint(gasto.Edit2.Text);
+data.tablegasto.FieldByName('tipo').Value:=gasto.ComboBox1.Text;
+data.tablegasto.FieldByName('monto').Value:=strtofloat(gasto.Edit3.Text);
+data.tablegasto.FieldByName('descripcion').Value:=gasto.Memo1.Text;
+
+data.tablegasto.Post;
+data.ADOQuery1.Edit;
+if gasto.combobox1.Text = 'L' then
+begin
+if consutadeuda.DBGrid1.Fields[5].Value <> 0 then
+begin
+data.ADOQuery1.Edit;
+consutadeuda.DBGrid1.Fields[5].Value := monto + consutadeuda.DBGrid1.Fields[5].Value;
+data.ADOQuery1.Post;
+data.ADOQuery1.Next;
+end
+else
+begin
+data.ADOQuery1.Edit;
+consutadeuda.DBGrid1.Fields[5].Value := monto;
+data.ADOQuery1.Post;
+end;
+end
+else
+begin
+if consutadeuda.DBGrid1.Fields[6].Value <> 0 then
+begin
+data.ADOQuery1.Edit;
+consutadeuda.DBGrid1.Fields[6].Value := monto + consutadeuda.DBGrid1.Fields[6].Value;
+data.ADOQuery1.Post;
+end
+else
+begin
+data.ADOQuery1.Edit;
+consutadeuda.DBGrid1.Fields[6].Value := monto;
+data.ADOQuery1.Post;
+end;
+end;
+end;
+data.ADOQuery1.First;
+if (gasto.combobox1.Text = 'L') then
+begin
+data.ADOQuery1.Edit;
+ consutadeuda.dbgrid1.Fields[8].AsFloat:= roundto(strtofloat(consutadeuda.dbgrid1.Fields[4].Value) + strtofloat (consutadeuda.dbgrid1.Fields[5].Value) +strtofloat(consutadeuda.dbgrid1.Fields[6].Value)+strtofloat(consutadeuda.dbgrid1.Fields[7].Value),-2);
+ data.ADOQuery1.Post;
+data.ADOQuery1.Next;
+end
+else
+begin
+ data.ADOQuery1.Edit;
+  consutadeuda.dbgrid1.Fields[8].AsFloat:= roundto(strtofloat(consutadeuda.dbgrid1.Fields[4].Value) + strtofloat (consutadeuda.dbgrid1.Fields[5].Value) +strtofloat(consutadeuda.dbgrid1.Fields[6].Value)+strtofloat(consutadeuda.dbgrid1.Fields[7].Value),-2);
+ data.ADOQuery1.Post;
+end;
+
+end;
+
+procedure TGasto.BitBtn1Click(Sender: TObject);
+begin
+if consutadeuda.DBGrid1.Fields[0].Value = null then
+begin
+ Messagedlg('No hay cuotas pendientes!!',MTerror,[mbok],0);
+ end
+ else
+ begin
+if combobox1.Text ='' then
+begin
+Messagedlg('Debe seleccional tipo de gasto!!',MTerror,[mbok],0);
+ end
+ else
+ begin
+ if memo1.Text='' then
+ begin
+ Messagedlg('Describa el gasto!!',MTerror,[mbok],0);
+ end
+ else
+ begin
+agregagasto;
+data.ADOQuery1.First;
+data.totalescuotas.Close;
+data.totalescuotas.SQL.Clear;
+data.totalescuotas.SQL.Add('select sum(imporxmora) as moras,sum(gastos_l) as totgasl,sum(otros) as tototro,sum(tot_pagar) as totag from cuotas where estatus ='+#39+ consutadeuda.edit3.Text +#39+'and cred_num =' + consutadeuda.edit1.Text ) ;
+data.totalescuotas.Open;
+bitbtn1.Enabled:=false;
+ end;
+ end;
+ end;
+  end;
+procedure TGasto.BitBtn3Click(Sender: TObject);
+begin
+data.dgasto.DataSet:= data.tablegasto;
+data.tablegasto.Insert;
+edit1.Text:=consutadeuda.Edit1.Text;
+edit2.Text:=data.tcredito.fieldbyname('cod_cliente').Value;
+end;
+
+procedure TGasto.BitBtn2Click(Sender: TObject);
+begin
+data.tablegasto.Delete;
+data.tablegasto.Delete;
+end;
+
+procedure TGasto.FormCreate(Sender: TObject);
+begin
+combobox1.ItemIndex:=0;
+end;
+
+end.

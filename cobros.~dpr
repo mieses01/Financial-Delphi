@@ -1,0 +1,92 @@
+program cobros;
+
+uses
+  Forms,
+  creditos in 'creditos.pas' {credito},
+  Unit2 in 'Unit2.pas' {Data: TDataModule},
+  Unit1 in 'Unit1.pas' {menus},
+  condeuda in 'condeuda.pas' {consutadeuda},
+  Unit3 in 'Unit3.pas' {login},
+  reportecred in 'reportecred.pas' {reportcredito},
+  cobro in 'cobro.pas' {Gasto},
+  pagom in 'pagom.pas' {pagos},
+  reporcobro in 'reporcobro.pas' {reportcobro},
+  deudacliente in 'deudacliente.pas' {repordeudacliente},
+  ucliente in 'ucliente.pas' {clientes},
+  listclient in 'listclient.pas' {listcliente},
+  datocli in 'datocli.pas' {datocliente},
+  creespacificos in 'creespacificos.pas' {listaporcred},
+  menuuno in 'menuuno.pas' {menu2},
+  menustres in 'menustres.pas' {menu3},
+  mencuatr in 'mencuatr.pas' {menucuatro},
+  consultacobro in 'consultacobro.pas' {consultacob},
+  mantenilogin in 'mantenilogin.pas' {mantlogin},
+  deudaporcl in 'deudaporcl.pas' {deudaporl},
+  concreditos in 'concreditos.pas' {consultacred},
+  repcred in 'repcred.pas' {repcreditos},
+  buscacli in 'buscacli.pas' {Buscacliente},
+  congastos in 'congastos.pas' {congasto},
+  inicio in 'inicio.pas' {spla},
+  estados in 'estados.pas' {estado},
+  sysutils,
+  informa in 'informa.pas' {informacion};
+
+{$R *.res}
+
+begin
+spla := tspla.Create(Application);
+spla.Show;
+spla.Update;
+  Application.Initialize;
+  Application.Title := 'FAP 1.0';
+  Application.CreateForm(Tmenus, menus);
+  Application.CreateForm(Tinformacion, informacion);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tconsutadeuda, consutadeuda);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tclientes, clientes);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tcredito, credito);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tconsultacred, consultacred);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tmantlogin, mantlogin);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tconsultacob, consultacob);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tmenu2, menu2);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tlogin, login);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tlistaporcred, listaporcred);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tpagos, pagos);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(TGasto, Gasto);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(TData, Data);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Treportcredito, reportcredito);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Treportcobro, reportcobro);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Trepordeudacliente, repordeudacliente);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tlistcliente, listcliente);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tdatocliente, datocliente);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tmenu3, menu3);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tmenucuatro, menucuatro);
+  spla.progressbar1.StepIt;
+  Application.CreateForm(Tdeudaporl, deudaporl);
+  Application.CreateForm(Trepcreditos, repcreditos);
+  Application.CreateForm(TBuscacliente, Buscacliente);
+  Application.CreateForm(Tcongasto, congasto);
+  Application.CreateForm(Testado, estado);
+ //Sleep(3000);
+spla.Hide;
+spla.Free;
+Application.Run;
+end.

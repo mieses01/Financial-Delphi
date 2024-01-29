@@ -1,0 +1,98 @@
+unit datocli;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QRCtrls, QuickRpt, ExtCtrls, DB;
+
+type
+  Tdatocliente = class(TForm)
+    dato: TQuickRep;
+    TitleBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRShape1: TQRShape;
+    QRLabel1: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRLabel2: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRDBText22: TQRDBText;
+    QRDBText21: TQRDBText;
+    QRDBText11: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRDBText12: TQRDBText;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBText19: TQRDBText;
+    QRDBText18: TQRDBText;
+    QRDBText20: TQRDBText;
+    QRDBText32: TQRDBText;
+    QRLabel24: TQRLabel;
+    QRLabel25: TQRLabel;
+    QRShape2: TQRShape;
+    QRLabel18: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRDBText31: TQRDBText;
+    QRDBText30: TQRDBText;
+    QRDBText29: TQRDBText;
+    QRDBText28: TQRDBText;
+    QRDBText27: TQRDBText;
+    QRDBText26: TQRDBText;
+    QRLabel26: TQRLabel;
+    QRDBText33: TQRDBText;
+    QRDBText34: TQRDBText;
+    QRDBText35: TQRDBText;
+    QRLabel27: TQRLabel;
+    QRLabel28: TQRLabel;
+    QRDBText36: TQRDBText;
+    QRDBText37: TQRDBText;
+    QRLabel29: TQRLabel;
+    DataSource1: TDataSource;
+    QRLabel30: TQRLabel;
+    QRLabel31: TQRLabel;
+    QRLabel32: TQRLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  datocliente: Tdatocliente;
+
+implementation
+
+uses Unit2;
+
+{$R *.dfm}
+
+end.

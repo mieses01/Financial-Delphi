@@ -1,0 +1,104 @@
+unit deudacliente;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QRCtrls, QuickRpt, ExtCtrls, DB, ADODB;
+
+type
+  Trepordeudacliente = class(TForm)
+    deudas: TQuickRep;
+    QRBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRSysData1: TQRSysData;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRShape1: TQRShape;
+    QRLabel1: TQRLabel;
+    QRSubDetail1: TQRSubDetail;
+    QRBand2: TQRBand;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRDBText11: TQRDBText;
+    QRLabel5: TQRLabel;
+    QRDBText12: TQRDBText;
+    QRBand3: TQRBand;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    PageFooterBand1: TQRBand;
+    QRSysData2: TQRSysData;
+    creddeuda: TDataSource;
+    cuoraep: TADOTable;
+    cuoraepcred_num: TIntegerField;
+    cuoraepno_cuota: TIntegerField;
+    cuoraepfecha_venc: TDateTimeField;
+    cuoraepdias_demora: TIntegerField;
+    cuoraepimpor_total: TBCDField;
+    cuoraepcapital: TBCDField;
+    cuoraepinteres: TBCDField;
+    cuoraepimporxmora: TBCDField;
+    cuoraepestatus: TWideStringField;
+    cuoraepcondicion: TWideStringField;
+    cuoraepcod_cliente: TIntegerField;
+    cuoraeptot_pagar: TBCDField;
+    cuoraepgastos_l: TBCDField;
+    cuoraepotros: TBCDField;
+    QRBand4: TQRBand;
+    QRShape2: TQRShape;
+    QRLabel14: TQRLabel;
+    ADOTable1: TADOTable;
+    ADOTable1cred_num: TAutoIncField;
+    ADOTable1cod_cliente: TIntegerField;
+    ADOTable1fecha: TDateTimeField;
+    ADOTable1tasa: TWideStringField;
+    ADOTable1importe: TBCDField;
+    ADOTable1num_cuotas: TIntegerField;
+    ADOTable1tipo_venc: TWideStringField;
+    ADOTable1venc_primer: TDateTimeField;
+    ADOTable1form_entrega: TWideStringField;
+    ADOTable1letras: TWideStringField;
+    ADOTable1observaciones: TWideStringField;
+    ADOTable1capital: TWideStringField;
+    ADOTable1interes: TWideStringField;
+    ADOTable1monto_mens: TWideStringField;
+    ADOTable1estatus: TWideStringField;
+    ADOTable1moras: TWideStringField;
+    ADOTable1nombrecli: TWideStringField;
+    ADOTable1telefono: TWideStringField;
+    ADOTable1usuario: TWideStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  repordeudacliente: Trepordeudacliente;
+
+implementation
+
+uses Unit2;
+
+{$R *.dfm}
+
+end.

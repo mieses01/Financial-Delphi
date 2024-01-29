@@ -1,0 +1,117 @@
+unit estados;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, DB, StdCtrls, Mask, DBCtrls, ADODB, ExtCtrls;
+
+type
+  Testado = class(TForm)
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    DataSource1: TDataSource;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label5: TLabel;
+    DBEdit5: TDBEdit;
+    Label6: TLabel;
+    DBEdit6: TDBEdit;
+    Label7: TLabel;
+    DBEdit7: TDBEdit;
+    ADOTable2: TADOTable;
+    DataSource2: TDataSource;
+    Label8: TLabel;
+    DBNavigator1: TDBNavigator;
+    ADOQuery1: TADOQuery;
+    ADOTable1: TADOTable;
+    DataSource3: TDataSource;
+    DBGrid2: TDBGrid;
+    Label9: TLabel;
+    ADOTable3: TADOTable;
+    DataSource4: TDataSource;
+    DBGrid3: TDBGrid;
+    Label10: TLabel;
+    ComboBox1: TComboBox;
+    Label11: TLabel;
+    Edit1: TEdit;
+    Label12: TLabel;
+    ADOTable2cred_num: TAutoIncField;
+    ADOTable2cod_cliente: TIntegerField;
+    ADOTable2fecha: TDateTimeField;
+    ADOTable2tasa: TWideStringField;
+    ADOTable2importe: TBCDField;
+    ADOTable2num_cuotas: TIntegerField;
+    ADOTable2tipo_venc: TWideStringField;
+    ADOTable2venc_primer: TDateTimeField;
+    ADOTable2form_entrega: TWideStringField;
+    ADOTable2letras: TWideStringField;
+    ADOTable2observaciones: TWideStringField;
+    ADOTable2capital: TWideStringField;
+    ADOTable2interes: TWideStringField;
+    ADOTable2monto_mens: TWideStringField;
+    ADOTable2estatus: TWideStringField;
+    ADOTable2moras: TWideStringField;
+    ADOTable2nombrecli: TWideStringField;
+    ADOTable2telefono: TWideStringField;
+    ADOTable2usuario: TWideStringField;
+    DBGrid1: TDBGrid;
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  estado: Testado;
+
+implementation
+
+uses Unit2;
+
+{$R *.dfm}
+
+procedure Testado.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key = #13 THEN
+BEGIN
+adoquery1.Active:=true;
+IF Not adoquery1.Locate(ComboBox1.Text,Edit1.Text,[])Then
+begin
+Messagedlg('Registro No Encontrado',MTerror,[mbok],0);
+adoquery1.Active:=false;
+adotable2.Active:=false;
+adotable1.Active:=false;
+adotable3.Active:=false;
+end
+else
+begin
+adotable2.Active:=true;
+adotable1.Active:=true;
+adotable3.Active:=true;
+END;
+end;
+end;
+
+procedure Testado.FormCreate(Sender: TObject);
+begin
+combobox1.ItemIndex:= 0;
+end;
+
+procedure Testado.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+adoquery1.Active:=false;
+adotable2.Active:=false;
+adotable1.Active:=false;
+adotable3.Active:=false;
+canclose:=true;
+end;
+
+end.

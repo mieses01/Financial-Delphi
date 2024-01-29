@@ -1,0 +1,50 @@
+unit men4;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, ExtCtrls, StdCtrls, Buttons, ComCtrls, ToolWin;
+
+type
+  Tmen = class(TForm)
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    ToolButton8: TToolButton;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    menun: TMainMenu;
+    Ficheros1: TMenuItem;
+    Clientes1: TMenuItem;
+    N1: TMenuItem;
+    Usuarios1: TMenuItem;
+    Operaciones1: TMenuItem;
+    NuevoCredito1: TMenuItem;
+    Consultadecreditos1: TMenuItem;
+    Cobrosrealizados1: TMenuItem;
+    Ayuda1: TMenuItem;
+    Consultacredito1: TMenuItem;
+    Consultagastos1: TMenuItem;
+    Estadodecuenta1: TMenuItem;
+    Salir1: TMenuItem;
+    Salir2: TMenuItem;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  men: Tmen;
+
+implementation
+
+{$R *.dfm}
+
+end.

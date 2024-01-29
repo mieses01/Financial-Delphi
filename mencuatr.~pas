@@ -1,0 +1,129 @@
+unit mencuatr;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, ExtCtrls, StdCtrls, Buttons, ComCtrls, ToolWin;
+
+type
+  Tmenucuatro = class(TForm)
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    ToolButton8: TToolButton;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    menun: TMainMenu;
+    Ficheros1: TMenuItem;
+    Clientes1: TMenuItem;
+    N1: TMenuItem;
+    Usuarios1: TMenuItem;
+    Operaciones1: TMenuItem;
+    NuevoCredito1: TMenuItem;
+    Consultadecreditos1: TMenuItem;
+    Cobrosrealizados1: TMenuItem;
+    Ayuda1: TMenuItem;
+    Consultacredito1: TMenuItem;
+    Estadodecuenta1: TMenuItem;
+    Salir1: TMenuItem;
+    Desarrollo1: TMenuItem;
+    utorial1: TMenuItem;
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Clientes1Click(Sender: TObject);
+    procedure NuevoCredito1Click(Sender: TObject);
+    procedure Consultadecreditos1Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure Estadodecuenta1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  menucuatro: Tmenucuatro;
+
+implementation
+
+uses ucliente, creditos, condeuda, estados, Unit3;
+
+{$R *.dfm}
+
+procedure Tmenucuatro.SpeedButton2Click(Sender: TObject);
+begin
+clientes := Tclientes.Create(Self);
+clientes.showmodal;
+end;
+
+procedure Tmenucuatro.SpeedButton3Click(Sender: TObject);
+begin
+credito := Tcredito.Create(Self);
+credito.ShowModal;
+end;
+
+procedure Tmenucuatro.SpeedButton4Click(Sender: TObject);
+begin
+consutadeuda := Tconsutadeuda.Create(Self);
+consutadeuda.ShowModal;
+end;
+
+procedure Tmenucuatro.FormCreate(Sender: TObject);
+begin
+
+label1.Caption:=datetostr(now);
+end;
+
+procedure Tmenucuatro.Clientes1Click(Sender: TObject);
+begin
+clientes := Tclientes.Create(Self);
+clientes.showmodal;
+end;
+
+procedure Tmenucuatro.NuevoCredito1Click(Sender: TObject);
+begin
+ credito := Tcredito.Create(Self);
+credito.ShowModal;
+end;
+
+procedure Tmenucuatro.Consultadecreditos1Click(Sender: TObject);
+begin
+consutadeuda := Tconsutadeuda.Create(Self);
+consutadeuda.ShowModal;
+end;
+
+procedure Tmenucuatro.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+if Application.MessageBox('¿Desea salir sistema de cobros?', 'FPA 1.0', MB_ICONQUESTION + MB_OKCANCEL) = mrOK then
+begin
+application.Terminate;
+CanClose := True
+end
+else
+begin
+CanClose := False;
+end;
+end;
+
+procedure Tmenucuatro.Estadodecuenta1Click(Sender: TObject);
+begin
+ estado.showmodal;
+end;
+
+procedure Tmenucuatro.SpeedButton1Click(Sender: TObject);
+begin
+login:=tlogin.Create(self);
+login.show;
+end;
+
+end.
